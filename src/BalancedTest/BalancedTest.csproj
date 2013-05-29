@@ -53,6 +53,7 @@
     <Compile Include="APIKeyTest.cs" />
     <Compile Include="BankAccountTest.cs" />
     <Compile Include="BankAccountVerificationTest.cs" />
+    <Compile Include="CardTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="MarketplaceTest.cs" />

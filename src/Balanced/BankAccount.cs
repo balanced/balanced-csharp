@@ -31,6 +31,10 @@ namespace Balanced
             }
         }
 
+        public const string Checking = "checking";
+
+        public const string Savings = "savings";
+
         public string Id;
 
         public DateTime CreatedAt;
@@ -67,6 +71,7 @@ namespace Balanced
         {
             base.Serialize(data);
 
+            data["meta"] = Meta;
             data["name"] = Name;
             data["account_number"] = AccountNumber;
             data["routing_number"] = RoutingNumber;

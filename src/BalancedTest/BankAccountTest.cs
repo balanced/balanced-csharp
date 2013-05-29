@@ -16,6 +16,7 @@ namespace BalancedTest
             ba.Name = "Homer Jay";
             ba.AccountNumber = "112233a";
             ba.RoutingNumber = "121042882";
+            ba.Type = BankAccount.Checking;
             ba.Save();
         }
     }

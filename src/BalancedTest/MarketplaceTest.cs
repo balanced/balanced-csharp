@@ -73,5 +73,24 @@ namespace BalancedTest
             Assert.AreEqual(ba.AccountNumber, "xxx233a");
             Assert.AreEqual(ba.RoutingNumber, "121042882");
         }
+
+        [TestMethod]
+        public void TestTokenizeCard() 
+        {
+            var card = Mine.TokenizeCard(
+                    "123 Fake Street",
+                    "Jollywood",
+                    null,
+                    "90210",
+                    "Homer Jay",
+                    "4112344112344113",
+                    "123",
+                    12,
+                    2013);
+            Assert.AreEqual(card.Name, "Homer Jay");
+            Assert.AreEqual(card.LastFour, "4113");
+            Assert.AreEqual(card.ExpirationYear, 2013);
+            Assert.AreEqual(card.ExpirationMonth, 12);
+        }
     }
 }

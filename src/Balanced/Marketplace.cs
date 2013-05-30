@@ -34,11 +34,9 @@ namespace Balanced
 
         public long InEscrow;
 
-        public string BankAccountsUri;
-
         BankAccount.Collection BankAccounts;
 
-        public string CardsUri;
+        Card.Collection Cards;
 
         public string CustomersUri;
 
@@ -87,11 +85,37 @@ namespace Balanced
             DomainUrl = (string)data["domain_url"];
             InEscrow = (long)data["in_escrow"];
             BankAccounts = new BankAccount.Collection((string)data["bank_accounts_uri"]);
+            Cards = new Card.Collection((string)data["cards_uri"]);
         }
 
         public BankAccount TokenizeBankAccount(string name, string accountNumber, string routingNumber)
         {
             return BankAccounts.Create(name, accountNumber, routingNumber);
+        }
+
+        public Card TokenizeCard(
+            string streetAddress,
+            string city,
+            string region,
+            string postalCode,
+            string name,
+            string cardNumber,
+            string securityCode,
+            int expirationMonth,
+            int expirationYear
+            )
+        {
+            return Cards.Create(
+                streetAddress,
+                city,
+                region,
+                postalCode,
+                name,
+                cardNumber,
+                securityCode,
+                expirationMonth,
+                expirationYear
+            );
         }
     }
 }

@@ -44,6 +44,7 @@
     <Compile Include="APIKey.cs" />
     <Compile Include="BankAccount.cs" />
     <Compile Include="BankAccountVerification.cs" />
+    <Compile Include="Card.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Marketplace.cs" />

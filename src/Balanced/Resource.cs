@@ -97,6 +97,16 @@ namespace Balanced
         protected void Deserialize(object src, out Dictionary<string, string> dst)
         {
             dst = ((IDictionary<string, object>)src).ToDictionary(kv => kv.Key, kv => (string)kv.Value);
+
+            System.Reflection.PropertyInfo[] Properties = this.GetType().GetProperties();
+            var PropertyNames = from x in Properties select x.Name;
+            foreach (KeyValuePair<string, string> entry in dst)
+            {
+                if (PropertyNames.Any(x => x == entry.Key))
+                {
+                    this.GetType().GetProperty(entry.Key).SetValue(this, entry.Value);
+                }
+            }
         }
 
         protected void Deserialize(object src, out DateTime dst)

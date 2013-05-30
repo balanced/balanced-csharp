@@ -82,6 +82,16 @@ namespace Balanced
         public virtual void Deserialize(IDictionary<string, object> data)
         {
             Uri = (String)data["uri"];
+
+            System.Reflection.PropertyInfo[] Properties = this.GetType().GetProperties();
+            var PropertyNames = from x in Properties select x.Name;
+            foreach (KeyValuePair<string, object> entry in data)
+            {
+                if (PropertyNames.Any(x => x == entry.Key))
+                {
+                    this.GetType().GetProperty(entry.Key).SetValue(this, entry.Value);
+                }
+            }
         }
 
         protected void Deserialize(object src, out Dictionary<string, string> dst)

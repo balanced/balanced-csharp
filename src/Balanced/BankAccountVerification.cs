@@ -8,9 +8,7 @@ namespace Balanced
     {
         public class Collection : ResourceCollection<BankAccountVerification>
         {
-            public Collection(string uri)
-                : base(uri)
-            { }
+            public Collection(string uri) : base(uri) {}
 
             public BankAccountVerification Create()
             {
@@ -19,19 +17,15 @@ namespace Balanced
         }
 
         public const string Pending = "pending";
-
         public const string Failed = "failed";
-
         public const string Verified = "verified";
-
         public string Id;
-
         public long Attempts;
-
         public long RemainingAttempts;
-
         public string State;
-
+        public BankAccountVerification() : base() {}
+        public BankAccountVerification(string uri) : base(uri) {}
+        public BankAccountVerification(IDictionary<string, object> payload) : base(payload) {}
         public override void Deserialize(IDictionary<string, object> data)
         {
             base.Deserialize(data);
@@ -49,5 +43,7 @@ namespace Balanced
             data["amount_2"] = amount_2;
             Deserialize((IDictionary<string, object>)Client.Put(Uri, data));
         }
+
+
     }
 }

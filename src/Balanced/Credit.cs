@@ -18,7 +18,7 @@ namespace Balanced
         public Dictionary<String, String> meta;
         public class Collection : ResourceCollection<Credit>
         {
-            public Collection(String uri) : base(uri) {}
+            public Collection(String uri) : base(typeof(Credit), uri) {}
         };
 
     }

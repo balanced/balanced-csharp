@@ -48,6 +48,7 @@ namespace Balanced
         }
 
         public string Uri;
+        public string Id;
 
         public virtual void Save()
         {
@@ -299,10 +300,9 @@ namespace Balanced
         where T : Resource, new()
     {
         protected string Path;
-
         protected NameValueCollection Parameters;
-
         protected Client _Client;
+        protected Type Cls;
 
         public Client Client
         {
@@ -327,8 +327,12 @@ namespace Balanced
                 Path = uri.Substring(0, i);
                 Parameters = HttpUtility.ParseQueryString(uri.Substring(i));
             }
-
         }
+        public ResourcePagination(Type cls, string uri) 
+        {
+            this.Cls = cls;
+        }
+
 
         public string Uri
         {
@@ -427,10 +431,8 @@ namespace Balanced
     public class ResourceQuery<T> : ResourcePagination<T>
         where T : Resource, new()
     {
-        public ResourceQuery(string uri)
-            : base(uri)
-        {
-        }
+        public ResourceQuery(string uri) : base(uri)  {}
+        public ResourceQuery(Type cls, string uri) : base(cls, uri) {}
 
         public ResourceQuery<T> Filter(string field, params object[] values)
         {
@@ -483,10 +485,9 @@ namespace Balanced
     public class ResourceCollection<T> : ResourcePagination<T>
         where T : Resource, new()
     {
-        public ResourceCollection(string uri)
-            : base(uri)
-        {
-        }
+        public ResourceCollection(string uri) : base(uri)  {}
+
+        public ResourceCollection(Type cls, string uri) : base(cls, uri) {}
 
         public T Create(IDictionary<string, object> data)
         {

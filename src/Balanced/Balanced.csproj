@@ -46,6 +46,7 @@
     <Compile Include="BankAccount.cs" />
     <Compile Include="BankAccountVerification.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="Callback.cs" />
     <Compile Include="Credit.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Customer.cs" />

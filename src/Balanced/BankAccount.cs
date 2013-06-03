@@ -6,66 +6,47 @@ namespace Balanced
 {
     public class BankAccount : Resource
     {
-        public static ResourceQuery<BankAccount> Query
+        public static ResourceQuery<Marketplace> Query
         {
             get
             {
-                return new ResourceQuery<BankAccount>("/v1/bank_accounts");
+//                return new ResourceQuery<BankAccount>("/v1/bank_accounts");
+                return new ResourceQuery<Marketplace>(typeof(Marketplace), RootUri);
             }
         }
 
-        public class Collection : ResourceCollection<BankAccount> 
+        public class Collection : ResourceCollection<BankAccount>
         {
-            public Collection(string uri) : base(uri)
-            { }
+            public Collection(string uri) : base(typeof(BankAccount), uri) {}
 
-            public BankAccount Create(string name, string accountNumber, string routingNumber)
-            {
-                var i = new BankAccount();
-                i.Name = name;
-                i.AccountNumber = accountNumber;
-                i.RoutingNumber = routingNumber;
-                Dictionary<string, object> data = new Dictionary<string, object>();
-                i.Serialize(data);
-                return base.Create(data);
-            }
+            //public BankAccount Create(string name, string accountNumber, string routingNumber)
+            //{
+            //    var i = new BankAccount();
+            //    i.Name = name;
+            //    i.AccountNumber = accountNumber;
+            //    i.RoutingNumber = routingNumber;
+            //    Dictionary<string, object> data = new Dictionary<string, object>();
+            //    i.Serialize(data);
+            //    return base.Create(data);
+            //}
         }
 
         public const string Checking = "checking";
-
         public const string Savings = "savings";
-
         public string Id;
-
         public DateTime CreatedAt;
-
         public Dictionary<string, string> Meta;
-
         public string Name;
-
         public string AccountNumber;
-
         public string RoutingNumber;
-
         public string Type;
-
         public string Fingerprint;
-
         public string BankName;
-
         public string VerificationsUri;
-
         public BankAccountVerification.Collection Verifications;
-
         public string VerificationUri;
-
-        public override string RootUri
-        {
-            get
-            {
-                return "/v1/bank_accounts";
-            }
-        }
+        
+        protected static String RootUri = "/v" + Settings.Version + "/bank_accounts"; 
 
         public override void Serialize(IDictionary<string, object> data)
         {
@@ -100,6 +81,24 @@ namespace Balanced
         public BankAccountVerification Verify()
         {
             return Verifications.Create();
+        }
+
+        public override void Save()
+        {
+            if (Id == null && Uri == null)
+            {
+                Uri = RootUri;
+            }
+            base.Save();
+        }
+
+        public BankAccountVerification GetVerification()
+        {
+            if (VerificationUri == null)
+            {
+                return null;
+            }
+            return new BankAccountVerification(VerificationUri);
         }
     }
 }

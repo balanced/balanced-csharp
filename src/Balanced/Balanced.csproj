@@ -41,17 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
     <Compile Include="APIKey.cs" />
     <Compile Include="BankAccount.cs" />
     <Compile Include="BankAccountVerification.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="Credit.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="Debit.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="Hold.cs" />
     <Compile Include="Marketplace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Refund.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SimpleJson.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

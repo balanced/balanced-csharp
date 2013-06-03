@@ -69,6 +69,7 @@ namespace BalancedTest
                 "112233a",
                 "121042882"
                 );
+
             Assert.AreEqual(ba.Name, "Homer Jay");
             Assert.AreEqual(ba.AccountNumber, "xxx233a");
             Assert.AreEqual(ba.RoutingNumber, "121042882");

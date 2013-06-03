@@ -21,6 +21,12 @@ namespace Balanced
             Deserialize(data);
         }
 
+        public Resource(string uri)
+        {
+            IDictionary<string, object> Payload = client.Get(uri);
+            this.Deserialize(Payload);
+        }
+
         public virtual string RootUri
         {
             get
@@ -28,7 +34,7 @@ namespace Balanced
                 return null;
             }
         }
-      
+
         protected Client client;
 
         public Client Client
@@ -84,12 +90,17 @@ namespace Balanced
             Uri = (String)data["uri"];
 
             System.Reflection.PropertyInfo[] Properties = this.GetType().GetProperties();
-            var PropertyNames = from x in Properties select x.Name;
+            IEnumerable<string> PropertyNames = from x in Properties select x.Name;
+            IDictionary<string, string> PropertyNameLookup = new Dictionary<string, string>();
+            foreach (string PropertyName in PropertyNames)
+            {
+                PropertyNameLookup[Utilities.ConvertToPythonCase(PropertyName)] = PropertyName;
+            }
             foreach (KeyValuePair<string, object> entry in data)
             {
-                if (PropertyNames.Any(x => x == entry.Key))
+                if (PropertyNameLookup.Keys.Any(x => x == entry.Key))
                 {
-                    this.GetType().GetProperty(entry.Key).SetValue(this, entry.Value);
+                    this.GetType().GetProperty(PropertyNameLookup[entry.Key]).SetValue(this, entry.Value);
                 }
             }
         }
@@ -99,12 +110,17 @@ namespace Balanced
             dst = ((IDictionary<string, object>)src).ToDictionary(kv => kv.Key, kv => (string)kv.Value);
 
             System.Reflection.PropertyInfo[] Properties = this.GetType().GetProperties();
-            var PropertyNames = from x in Properties select x.Name;
+            IEnumerable<string> PropertyNames = from x in Properties select x.Name;
+            IDictionary<string, string> PropertyNameLookup = new Dictionary<string, string>();
+            foreach (string PropertyName in PropertyNames)
+            {
+                PropertyNameLookup[Utilities.ConvertToPythonCase(PropertyName)] = PropertyName;
+            }
             foreach (KeyValuePair<string, string> entry in dst)
             {
-                if (PropertyNames.Any(x => x == entry.Key))
+                if (PropertyNameLookup.Keys.Any(x => x == entry.Key))
                 {
-                    this.GetType().GetProperty(entry.Key).SetValue(this, entry.Value);
+                    this.GetType().GetProperty(PropertyNameLookup[entry.Key]).SetValue(this, entry.Value);
                 }
             }
         }
@@ -115,7 +131,7 @@ namespace Balanced
         }
     }
 
-    public class ResourcePage<T> 
+    public class ResourcePage<T>
         where T : Resource, new()
     {
         public ResourcePage(string uri)
@@ -129,19 +145,12 @@ namespace Balanced
         }
 
         public string Uri;
-
         public List<T> _Items;
-
         public long _Total;
-
         public string _FirstUri;
-
         public string _PreviousUri;
-
         public string _NextUri;
-
         public string _LastUri;
-
         protected Client _Client;
 
         public Client Client
@@ -256,9 +265,9 @@ namespace Balanced
 
         protected bool Loaded
         {
-            get 
+            get
             {
-                return _Items != null; 
+                return _Items != null;
             }
         }
 
@@ -318,7 +327,7 @@ namespace Balanced
                 Path = uri.Substring(0, i);
                 Parameters = HttpUtility.ParseQueryString(uri.Substring(i));
             }
-            
+
         }
 
         public string Uri

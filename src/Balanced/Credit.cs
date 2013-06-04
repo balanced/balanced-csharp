@@ -8,14 +8,14 @@ namespace Balanced
 {
     class Credit : Resource
     {
-        public DateTime created_at;
-        public int amount;
-        public String description;
-        public String status;
-        public BankAccount bank_account;
-        public String account_uri;
-        public Account account;
-        public Dictionary<String, String> meta;
+        public DateTime CreatedAt;
+        public int Amount;
+        public String Description;
+        public String Status;
+        public BankAccount BankAccount;
+        public String AccountUri;
+        public Account Account;
+        public Dictionary<String, String> Meta;
         public class Collection : ResourceCollection<Credit>
         {
             public Collection(String uri) : base(typeof(Credit), uri) {}

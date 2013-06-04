@@ -8,19 +8,22 @@ namespace Balanced
 {
     class Refund : Resource
     {
-        public DateTime created_at;
-        public Dictionary<String, String> meta;
-        public int amount;
-        public string description;
-        public Account account;
-        public string appears_on_statement_as;
-        public string transaction_number;
-        public Debit debit;
-        public string account_uri;
+        public DateTime CreatedAt;
+        public Dictionary<String, String> Meta;
+        public int Amount;
+        public string Description;
+        public Account Account;
+        public string AppearsOnStatmentAs;
+        public string TransactionNumber;
+        public Debit Debit;
+        public string AccountUri;
         public class Collection : ResourceCollection<Refund>
         {
-            public Collection(string uri) : base(uri) { }
+            public Collection(string uri) : base(typeof(Refund), uri) { }
         };
+        public Refund() : base() { }
+        public Refund(IDictionary<string, object> payload) : base(payload) { }
+
 
     }
 }

@@ -8,25 +8,61 @@ namespace Balanced
 {
     class Debit : Resource
     {
-        public DateTime created_at;
-        public Dictionary<String, String> meta;
-        public int amount;
-        public String description;
-        public String transaction_number;
-        public Card card;
-        public String card_uri;
-        public String account_uri;
-        public Account account;
-        public String hold_uri;
-        public Hold hold;
-        public String refunds_uri;
-        public Refund.Collection refunds;
+        public DateTime CreatedAt;
+        public Dictionary<String, String> Meta;
+        public int Amount;
+        public String Description;
+        public String TransactionNumber;
+        public Card Card;
+        public String CardUri;
+        public String AccountUri;
+        public Account Account;
+        public String HoldUri;
+        public Hold Hold;
+        public String RefundsUri;
+        public Refund.Collection Refunds;
         public class Collection : ResourceCollection<Debit>
         {
-            public Collection(String uri) : base(uri) { }
+            public Collection(String uri) : base(typeof(Debit), uri) { }
         };
         public Debit() : base() {}
-
-
+        public Debit(IDictionary<string, object> payload) : base(payload) { }
+        public Refund Refund(
+            int amount,
+            string description,
+            IDictionary<string, string> meta)
+        {
+            IDictionary<string, object> payload = new Dictionary<string, object>();
+            if (amount != null) { payload["amount"] = amount; }
+            if (description != null) { payload["description"] = description; }
+            if (meta != null) { payload["meta"] = meta; }
+            return Refunds.Create(payload);
+        }
+        public Refund Refund(int amount)
+        {
+            return Refund(amount, null, null);
+        }
+        public Refund Refund()
+        {
+            return Refund(null, null, null);
+        }
+        public Account GetAccount()
+        {
+            if (Account == null)
+                Account = new Account(AccountUri);
+            return Account;
+        }
+        public Card GetCard()
+        {
+            if (Card == null)
+                Card = new Card(CardUri);
+            return Card;
+        }
+        public Hold GetHold()
+        {
+            if (Hold == null)
+                Hold = new Hold(HoldUri);
+            return Hold;
+        }
     }
 }

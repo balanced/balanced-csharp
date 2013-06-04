@@ -22,10 +22,10 @@ namespace Balanced
         public string CreditsUri { get; set; }
         public Credit.Collection Credits { get; set; }
         public string DebitsUri { get; set; }
-        public Debit.Collection Debits;                        
-        public string HoldsUri;                               
-        public Hold.Collection Holds;
-        public Dictionary<String, String> Meta;                       
+        public Debit.Collection Debits { get; set; }
+        public string HoldsUri { get; set; }
+        public Hold.Collection Holds { get; set; }
+        public Dictionary<String, String> Meta { get; set; }           
         
         public class Collection : ResourceCollection<Account>
         {

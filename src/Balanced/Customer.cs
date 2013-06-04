@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Balanced
 {
-    class Customer : Resource
+    public class Customer : Resource
     {
         protected Client Client = new Client();
         public Dictionary<String, String> Address { get; set; }
@@ -38,7 +38,7 @@ namespace Balanced
         public Customer(string uri) : base(uri) { }
         public Customer(IDictionary<string, object> payload) : base(payload) { }
 
-        public static class Collection : ResourceCollection<Customer>
+        public class Collection : ResourceCollection<Customer>
         {
             public Collection(String uri) : base(typeof(Customer), uri) { }
         };

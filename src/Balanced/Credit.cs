@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Balanced
 {
-    class Credit : Resource
+    public class Credit : Resource
     {
         public DateTime CreatedAt { get; set; }
         public int Amount { get; set; }

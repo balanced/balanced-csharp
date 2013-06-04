@@ -86,19 +86,19 @@ namespace Balanced
         {
             base.Deserialize(data);
 
-            Id = (string)data["id"];
-            Deserialize(data["created_at"], out CreatedAt);
-            Deserialize(data["meta"], out Meta);
-            StreetAddress = (string)data["street_address"];
-            PostalCode = (string)data["postal_code"];
-            CountryCode = (string)data["country_code"];
-            Name = (string)data["name"];
-            ExpirationMonth = (long)data["expiration_month"];
-            ExpirationYear = (long)data["expiration_year"];
-            LastFour = (string)data["last_four"];
-            Brand = (string)data["brand"];
-            IsValid = (bool)data["is_valid"];
-            Fingerprint = (string)data["hash"];
+            //Id = (string)data["id"];
+            //Deserialize(data["created_at"], out CreatedAt);
+            //Deserialize(data["meta"], out Meta);
+            //StreetAddress = (string)data["street_address"];
+            //PostalCode = (string)data["postal_code"];
+            //CountryCode = (string)data["country_code"];
+            //Name = (string)data["name"];
+            //ExpirationMonth = (long)data["expiration_month"];
+            //ExpirationYear = (long)data["expiration_year"];
+            //LastFour = (string)data["last_four"];
+            //Brand = (string)data["brand"];
+            //IsValid = (bool)data["is_valid"];
+            //Fingerprint = (string)data["hash"];
         }
     }
 }

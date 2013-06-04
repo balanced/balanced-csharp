@@ -63,18 +63,18 @@ namespace Balanced
         {
             base.Deserialize(data);
 
-            Id = (string)data["id"];
-            Deserialize(data["created_at"], out CreatedAt);
-            Deserialize(data["meta"], out Meta);
-            Name = (string)data["name"];
-            AccountNumber = (string)data["account_number"];
-            RoutingNumber = (string)data["routing_number"];
-            Type = (string)data["type"];
-            Fingerprint = (string)data["fingerprint"];
-            BankName = (string)data["bank_name"];
-            VerificationsUri = (string)data["verifications_uri"];
-            Verifications = new BankAccountVerification.Collection(VerificationsUri);
-            VerificationUri = (string)data["verification_uri"];
+            //Id = (string)data["id"];
+            //Deserialize(data["created_at"], out CreatedAt);
+            //Deserialize(data["meta"], out Meta);
+            //Name = (string)data["name"];
+            //AccountNumber = (string)data["account_number"];
+            //RoutingNumber = (string)data["routing_number"];
+            //Type = (string)data["type"];
+            //Fingerprint = (string)data["fingerprint"];
+            //BankName = (string)data["bank_name"];
+            //VerificationsUri = (string)data["verifications_uri"];
+            //Verifications = new BankAccountVerification.Collection(VerificationsUri);
+            //VerificationUri = (string)data["verification_uri"];
         }
 
         public BankAccountVerification Verify()

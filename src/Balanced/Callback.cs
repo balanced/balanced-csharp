@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Balanced
 {
-    class Callback : Resource
+    public class Callback : Resource
     {
         public string Url { get; set; }
 
-        public static class Collection : ResourceCollection<Callback>
+        public class Collection : ResourceCollection<Callback>
         {
             public Collection(string uri) : base(typeof(Callback), uri) { }
 

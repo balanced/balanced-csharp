@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Balanced
 {
-    class Refund : Resource
+    public class Refund : Resource
     {
         public DateTime CreatedAt { get; set; }
         public Dictionary<String, String> Meta { get; set; }

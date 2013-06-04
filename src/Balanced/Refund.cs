@@ -17,13 +17,26 @@ namespace Balanced
         public string TransactionNumber;
         public Debit Debit;
         public string AccountUri;
+
+        public Refund() : base() { }
+
+        public Refund(IDictionary<string, object> payload) : base(payload) { }
+
         public class Collection : ResourceCollection<Refund>
         {
             public Collection(string uri) : base(typeof(Refund), uri) { }
-        };
-        public Refund() : base() { }
-        public Refund(IDictionary<string, object> payload) : base(payload) { }
 
-
+            public Refund Create(
+                int amount,
+                string description,
+                IDictionary<string, string> meta)
+            {
+                IDictionary<string, object> payload = new Dictionary<string, object>();
+                if (amount != null) { payload["amount"] = amount; }
+                if (description != null) { payload["description"] = description; }
+                if (meta != null) { payload["meta"] = meta; }
+                return this.Create(payload);
+            }
+        }
     }
 }

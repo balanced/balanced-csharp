@@ -18,16 +18,16 @@ namespace Balanced
         {
             public Collection(string uri) : base(typeof(BankAccount), uri) {}
 
-            //public BankAccount Create(string name, string accountNumber, string routingNumber)
-            //{
-            //    var i = new BankAccount();
-            //    i.Name = name;
-            //    i.AccountNumber = accountNumber;
-            //    i.RoutingNumber = routingNumber;
-            //    Dictionary<string, object> data = new Dictionary<string, object>();
-            //    i.Serialize(data);
-            //    return base.Create(data);
-            //}
+            public BankAccount Create(string name, string accountNumber, string routingNumber)
+            {
+                var i = new BankAccount();
+                i.Name = name;
+                i.AccountNumber = accountNumber;
+                i.RoutingNumber = routingNumber;
+                Dictionary<string, object> data = new Dictionary<string, object>();
+                i.Serialize(data);
+                return base.Create(data);
+            }
         }
 
         public const string Checking = "checking";

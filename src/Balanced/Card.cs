@@ -7,6 +7,10 @@ namespace Balanced
 {
     public class Card : Resource
     {
+        public Card() : base() { }
+
+        public Card(string uri) : base(uri) {}
+
         public class Collection : ResourceCollection<Card>
         {
             public Collection(string uri)
@@ -25,7 +29,7 @@ namespace Balanced
                 int expirationYear
                 )
             {
-                var i = new Card()
+                var i = new Card() 
                 { 
                     StreetAddress = streetAddress,
                     PostalCode = postalCode,

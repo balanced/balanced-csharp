@@ -473,7 +473,6 @@ namespace Balanced
             return this;
         }
 
-
         public ResourceQuery<T> OrderBy(string field, ResourceQueryOrder direction)
         {
             string sort = String.Format("{0},{1}", field, direction == ResourceQueryOrder.ASCENDING ? "asc" : "desc");

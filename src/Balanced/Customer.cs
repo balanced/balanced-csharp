@@ -79,7 +79,7 @@ namespace Balanced
         {
             return (BankAccounts.Query
                                 .Filter("is_valid", true)
-                                .OrderBy("created_at")
+                                .OrderBy("created_at", ResourceQueryOrder.DESCENDING)
                                 .First());
         }
 
@@ -100,7 +100,7 @@ namespace Balanced
         {
             return (Cards.Query
                           .Filter("is_valid", true)
-                          .OrderBy("created_at")
+                          .OrderBy("created_at", ResourceQueryOrder.DESCENDING)
                           .First());
         }
 

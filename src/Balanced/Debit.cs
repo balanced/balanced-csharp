@@ -54,11 +54,7 @@ namespace Balanced
             string description,
             IDictionary<string, string> meta)
         {
-            IDictionary<string, object> payload = new Dictionary<string, object>();
-            if (amount != null) { payload["amount"] = amount; }
-            if (description != null) { payload["description"] = description; }
-            if (meta != null) { payload["meta"] = meta; }
-            return Refunds.Create(payload);
+            return Refunds.Create(amount, description, meta);
         }
 
         public Refund Refund(int amount)
@@ -68,8 +64,7 @@ namespace Balanced
 
         public Refund Refund()
         {
-            //todo
-            //return Refund(null, null, null);
+            return new Refund();
         }
 
         public Account GetAccount()

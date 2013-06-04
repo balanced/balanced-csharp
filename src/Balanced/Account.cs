@@ -26,7 +26,7 @@ namespace Balanced
         public string HoldsUri;                               
         public Hold.Collection Holds;
         public Dictionary<String, String> Meta;                       
-
+        
         public class Collection : ResourceCollection<Account>
         {
             public Collection(string uri) : base(uri) { }
@@ -45,18 +45,7 @@ namespace Balanced
                              string appearsOnStatementAs,
                              IDictionary<string, string> meta)
         {
-            IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["amount"] = amount;
-            if (description != null)                                             
-                payload["description"] = description;
-            if (destinationUri != null)                                         
-                payload["destination"] = destinationUri;
-            if (appearsOnStatementAs != null)                                 
-                payload["appears_on_statement_as"] = appearsOnStatementAs; 
-            if (meta != null)                                                    
-                payload["meta"] = meta;                                       
-
-            return Credits.Create(payload);
+            return Credits.Create(amount, description, destinationUri, appearsOnStatementAs, null, meta);
         }
 
         public Credit Credit(int amount) {
@@ -65,22 +54,11 @@ namespace Balanced
         
         public Debit Debit(int amount, 
                            string description,
-                           string sourceURI,
+                           string sourceUri,
                            string appearsOnStatementAs,
                            IDictionary<string, string> meta)
         {
-            IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["amount"] = amount;
-            if (description != null)
-                payload["description"] = description;
-            if (sourceURI != null)
-                payload["source"] = sourceURI;
-            if (appearsOnStatementAs != null)
-                payload["appears_on_statement_as"] = appearsOnStatementAs;
-            if (meta != null)
-                payload["meta"] = meta;                                       
-
-            return Debits.Create(payload);
+            return Debits.Create(amount, description, sourceUri, appearsOnStatementAs, null, meta);
         }
 
         public Debit Debit(int amount) {
@@ -89,19 +67,10 @@ namespace Balanced
 
         public Hold Hold(int amount, 
                          string description,
-                         string sourceURI,
+                         string sourceUri,
                          IDictionary<string, string> meta)
         {
-            IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["amount"] = amount;
-            if (description != null)
-                payload["description"] = description;
-            if (sourceURI != null)
-                payload["source"] = sourceURI;
-            if (meta != null)
-                payload["meta"] = meta;
-
-            return Holds.Create(payload);
+            return Holds.Create(amount, description, sourceUri, meta);
         }
 
         public Hold hold(int amount) {

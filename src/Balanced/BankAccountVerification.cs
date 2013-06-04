@@ -19,10 +19,10 @@ namespace Balanced
         public const string Pending = "pending";
         public const string Failed = "failed";
         public const string Verified = "verified";
-        public string Id;
-        public long Attempts;
-        public long RemainingAttempts;
-        public string State;
+        public string Id { get; set; }
+        public long Attempts { get; set; }
+        public long RemainingAttempts { get; set; }
+        public string State { get; set; }
 
         public BankAccountVerification() : base() {}
 

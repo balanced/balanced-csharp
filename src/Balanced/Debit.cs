@@ -8,19 +8,19 @@ namespace Balanced
 {
     class Debit : Resource
     {
-        public DateTime CreatedAt;
-        public Dictionary<String, String> Meta;
-        public int Amount;
-        public String Description;
-        public String TransactionNumber;
-        public Card Card;
-        public String CardUri;
-        public String AccountUri;
-        public Account Account;
-        public String HoldUri;
-        public Hold Hold;
-        public String RefundsUri;
-        public Refund.Collection Refunds;
+        public DateTime CreatedAt { get; set; }
+        public Dictionary<String, String> Meta { get; set; }
+        public int Amount { get; set; }
+        public String Description { get; set; }
+        public String TransactionNumber { get; set; }
+        public Card Card { get; set; }
+        public String CardUri { get; set; }
+        public String AccountUri { get; set; }
+        public Account Account { get; set; }
+        public String HoldUri { get; set; }
+        public Hold Hold { get; set; }
+        public String RefundsUri { get; set; }
+        public Refund.Collection Refunds { get; set; }
 
         public class Collection : ResourceCollection<Debit>
         {

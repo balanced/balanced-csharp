@@ -9,30 +9,30 @@ namespace Balanced
     class Customer : Resource
     {
         protected Client Client = new Client();
-        public Dictionary<String, String> Address;
-        public String BankAccountsUri;
-        public BankAccount.Collection BankAccounts;
-        public String BusinessName;
-        public String CardsUri;
-        public Card.Collection Cards;
-        public String CreditsUri;
-        public Credit.Collection Credits;
-        public String DebitsUri;
-        public Debit.Collection Debits;
-        public String Dob;
-        public String Ein;
-        public String Email;
-        public String Facebook;
-        public String HoldsUri;
-        public Hold.Collection Holds;
-        public Boolean IsIdentityVerified;
-        public Dictionary<String, String> Meta;
-        public String Name;
-        public String Phone;
-        public String RefundsUri;
-        public Refund.Collection Refunds;
-        public String SsnLast4;
-        public String Twitter;
+        public Dictionary<String, String> Address { get; set; }
+        public String BankAccountsUri { get; set; }
+        public BankAccount.Collection BankAccounts { get; set; }
+        public String BusinessName { get; set; }
+        public String CardsUri { get; set; }
+        public Card.Collection Cards { get; set; }
+        public String CreditsUri { get; set; }
+        public Credit.Collection Credits { get; set; }
+        public String DebitsUri { get; set; }
+        public Debit.Collection Debits { get; set; }
+        public String Dob { get; set; }
+        public String Ein { get; set; }
+        public String Email { get; set; }
+        public String Facebook { get; set; }
+        public String HoldsUri { get; set; }
+        public Hold.Collection Holds { get; set; }
+        public Boolean IsIdentityVerified { get; set; }
+        public Dictionary<String, String> Meta { get; set; }
+        public String Name { get; set; }
+        public String Phone { get; set; }
+        public String RefundsUri { get; set; }
+        public Refund.Collection Refunds { get; set; }
+        public String SsnLast4 { get; set; }
+        public String Twitter { get; set; }
 
         public Customer() : base() { }
         public Customer(string uri) : base(uri) { }

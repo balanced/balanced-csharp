@@ -32,18 +32,18 @@ namespace Balanced
 
         public const string Checking = "checking";
         public const string Savings = "savings";
-        public string Id;
-        public DateTime CreatedAt;
-        public Dictionary<string, string> Meta;
-        public string Name;
-        public string AccountNumber;
-        public string RoutingNumber;
-        public string Type;
-        public string Fingerprint;
-        public string BankName;
-        public string VerificationsUri;
-        public BankAccountVerification.Collection Verifications;
-        public string VerificationUri;
+        public string Id { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public Dictionary<string, string> Meta { get; set; }
+        public string Name { get; set; }
+        public string AccountNumber { get; set; }
+        public string RoutingNumber { get; set; }
+        public string Type { get; set; }
+        public string Fingerprint { get; set; }
+        public string BankName { get; set; }
+        public string VerificationsUri { get; set; }
+        public BankAccountVerification.Collection Verifications { get; set; }
+        public string VerificationUri { get; set; }
         
         protected static String RootUri = "/v" + Settings.Version + "/bank_accounts"; 
 

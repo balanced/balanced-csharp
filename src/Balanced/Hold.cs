@@ -8,20 +8,23 @@ namespace Balanced
 {
     class Hold : Resource
     {
-        public DateTime CreatedAt;
-        public Dictionary<String, String> Meta;
-        public int Amount;
-        public DateTime ExpiresAt;
-        public String Description;
-        public Debit Debit;
-        public String TransactionNumber;
-        public Boolean IsVoid;
-        public String AccountUri;
-        public Account Account;
-        public String CardUri;
-        public Card Card;
+        public DateTime CreatedAt { get; set; }
+        public Dictionary<String, String> Meta { get; set; }
+        public int Amount { get; set; }
+        public DateTime ExpiresAt { get; set; }
+        public String Description{ get; set; }
+        public Debit Debit { get; set; }
+        public String TransactionNumber { get; set; }
+        public Boolean IsVoid { get; set; }
+        public String AccountUri { get; set; }
+        public Account Account { get; set; }
+        public String CardUri { get; set; }
+        public Card Card { get; set; }
+
         public Hold() : base() { }
+
         public Hold(string uri) : base(uri) { }
+
         public Hold(IDictionary<string, object> payload) : base(payload) { }
 
         public class Collection : ResourceCollection<Hold>
@@ -83,7 +86,5 @@ namespace Balanced
             Debit = Account.Debits.Create(payload);
             return Debit;
         }
-
-
     }
 }

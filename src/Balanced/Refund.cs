@@ -8,15 +8,15 @@ namespace Balanced
 {
     class Refund : Resource
     {
-        public DateTime CreatedAt;
-        public Dictionary<String, String> Meta;
-        public int Amount;
-        public string Description;
-        public Account Account;
-        public string AppearsOnStatmentAs;
-        public string TransactionNumber;
-        public Debit Debit;
-        public string AccountUri;
+        public DateTime CreatedAt { get; set; }
+        public Dictionary<String, String> Meta { get; set; }
+        public int Amount { get; set; }
+        public string Description { get; set; }
+        public Account Account { get; set; }
+        public string AppearsOnStatmentAs { get; set; }
+        public string TransactionNumber { get; set; }
+        public Debit Debit { get; set; }
+        public string AccountUri { get; set; }
 
         public Refund() : base() { }
 

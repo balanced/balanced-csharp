@@ -47,19 +47,19 @@ namespace Balanced
             }
         }
 
-        public string Id;
-        public DateTime CreatedAt;
-        public Dictionary<string, string> Meta;
-        public string StreetAddress;
-        public string PostalCode;
-        public string CountryCode;
-        public string Name;
-        public long ExpirationMonth;
-        public long ExpirationYear;
-        public string LastFour;
-        public string Brand;
-        public Boolean IsValid;
-        public string Fingerprint;
+        public string Id { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public Dictionary<string, string> Meta { get; set; }
+        public string StreetAddress { get; set; }
+        public string PostalCode { get; set; }
+        public string CountryCode { get; set; }
+        public string Name { get; set; }
+        public long ExpirationMonth { get; set; }
+        public long ExpirationYear { get; set; }
+        public string LastFour { get; set; }
+        public string Brand { get; set; }
+        public Boolean IsValid { get; set; }
+        public string Fingerprint { get; set; }
         public void invalidate()
         {
             IsValid = false;

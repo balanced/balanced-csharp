@@ -15,11 +15,8 @@ namespace Balanced
         }
 
         public string Id;
-
         public DateTime CreatedAt;
-
         public Dictionary<string, string> Meta = new Dictionary<string, string>();
-
         public string Secret;
 
         public override string RootUri

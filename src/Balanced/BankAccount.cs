@@ -10,7 +10,6 @@ namespace Balanced
         {
             get
             {
-//                return new ResourceQuery<BankAccount>("/v1/bank_accounts");
                 return new ResourceQuery<Marketplace>(typeof(Marketplace), RootUri);
             }
         }

@@ -31,12 +31,16 @@ namespace Balanced
         {
             public Collection(string uri) : base(uri) { }
         };
+
         public static Account Get(string uri) 
         { 
             return new Account((new Client()).Get(uri));         
         }                                                        
+
         public Account() : base() {}                                   
+
         public Account(IDictionary<string, Object> payload) : base(payload)  {}                                                                  
+
         public Account(string uri) : base(uri) {}  
 
         public Credit Credit(int amount, 
@@ -89,6 +93,8 @@ namespace Balanced
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
             payload["merchant"] = merchantMap;
+            IDictionary<string, object> response = Client.Put(Uri, payload);
+            Deserialize(response);
         }
 
         public void PromoteToMerchant(string merchantUri)

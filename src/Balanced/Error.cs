@@ -16,13 +16,9 @@ namespace Balanced
     public class Error : Exception
     {
         public string Id;
-
         public string CategoryType;
-
         public string CategoryCode;
-
         public string Description;
-
         public Dictionary<String, object> Extras = new Dictionary<string, object>();
 
         public static Error Create(IDictionary<string, object> data)

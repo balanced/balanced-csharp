@@ -23,33 +23,19 @@ namespace Balanced
         }
 
         public string Id;
-
         public string Name;
-
         public string SupportEmailAddress;
-
         public string SupportPhoneNumber;
-
         public string DomainUrl;
-
         public long InEscrow;
-
         BankAccount.Collection BankAccounts;
-
         Card.Collection Cards;
-
         public string CustomersUri;
-
         public string DebitsUri;
-
         public string CreditsUri;
-
         public string HoldsUri;
-
         public string RefundsUri;
-
         public string EventsUri;
-
         public string CallbacksUri;
 
         public override string RootUri

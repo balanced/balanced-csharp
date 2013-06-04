@@ -44,31 +44,18 @@ namespace Balanced
         }
 
         public string Id;
-
         public DateTime CreatedAt;
-
         public Dictionary<string, string> Meta;
-
         public string StreetAddress;
-
         public string PostalCode;
-
         public string CountryCode;
-
         public string Name;
-
         public long ExpirationMonth;
-
         public long ExpirationYear;
-
         public string LastFour;
-
         public string Brand;
-
         public Boolean IsValid;
-
         public string Fingerprint;
-
         public void invalidate()
         {
             IsValid = false;

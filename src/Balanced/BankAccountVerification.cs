@@ -23,9 +23,13 @@ namespace Balanced
         public long Attempts;
         public long RemainingAttempts;
         public string State;
+
         public BankAccountVerification() : base() {}
+
         public BankAccountVerification(string uri) : base(uri) {}
+
         public BankAccountVerification(IDictionary<string, object> payload) : base(payload) {}
+
         public override void Deserialize(IDictionary<string, object> data)
         {
             base.Deserialize(data);
@@ -43,7 +47,5 @@ namespace Balanced
             data["amount_2"] = amount_2;
             Deserialize((IDictionary<string, object>)Client.Put(Uri, data));
         }
-
-
     }
 }

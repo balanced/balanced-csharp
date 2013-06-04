@@ -11,15 +11,10 @@ namespace Balanced
     public class Client
     {
         public static readonly Encoding Encoding = Encoding.UTF8;
-
         public static readonly string ContentType = string.Format("application/json");
-
         public static readonly string AcceptType = "application/json";
-
         public static Uri BaseUri;
-
         public static string Secret;
-
         public static string UserAgent;
 
         public Client(string baseUri, string secret)

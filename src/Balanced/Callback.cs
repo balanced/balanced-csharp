@@ -9,9 +9,11 @@ namespace Balanced
     class Callback : Resource
     {
         public string Url { get; set; }
+
         public static class Collection : ResourceCollection<Callback>
         {
             public Collection(string uri) : base(typeof(Callback), uri) { }
+
             public Callback Create(string url)
             {
                 Callback callback = new Callback();
@@ -21,8 +23,11 @@ namespace Balanced
                 return callback;
             }
         }
+
         public Callback() : base() { }
+
         public Callback(string uri) : base(uri) { }
+
         public Callback(IDictionary<string, object> payload) : base(payload) { }
     }
 }

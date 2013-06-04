@@ -119,7 +119,7 @@ namespace Balanced
         public void PromoteToMerchant(IDictionary<string, object> merchantMap)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
-            paylod["merchant"] = merchantMap;
+            payload["merchant"] = merchantMap;
         }
 
         public void PromoteToMerchant(string merchantUri)

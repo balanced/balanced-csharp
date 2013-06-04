@@ -42,14 +42,17 @@ namespace Balanced
         {
             public Collection(String uri) : base(typeof(Customer), uri) { }
         };
+
         public static ResourceQuery<Customer> Query()
         {
             return new ResourceQuery<Customer>(typeof(Customer), string.Format("/v/%s/%s", Settings.Version, "customers"));
         }
+
         public static Customer Get(string uri)
         {
             return new Customer((new Client()).Get(uri));
         }
+
         public override void Save()
         {
             if (Id == null && Uri == null)
@@ -58,17 +61,20 @@ namespace Balanced
             }
             base.Save();
         }
+
         public void AddBankAccount(string bankAccountUri)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
             payload["bank_account_uri"] = bankAccountUri;
-            IDictionary<string, object> response = Client.Put(uri, payload);
+            IDictionary<string, object> response = Client.Put(Uri, payload);
             Deserialize(response);
         }
+
         public void AddBankAccount(BankAccount bankAccount)
         {
             AddBankAccount(bankAccount.Uri);
         }
+
         public BankAccount ActiveBankAccount()
         {
             return (BankAccounts.Query
@@ -76,6 +82,7 @@ namespace Balanced
                                 .OrderBy("created_at")
                                 .First());
         }
+
         public void AddCard(string cardUri)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
@@ -83,10 +90,12 @@ namespace Balanced
             IDictionary<string, object> response = Client.Put(Uri, payload);
             Deserialize(response);
         }
+
         public void AddCard(Card card)
         {
             AddCard(card.Uri);
         }
+
         public Card ActiveCard()
         {
             return (Cards.Query
@@ -94,6 +103,7 @@ namespace Balanced
                           .OrderBy("created_at")
                           .First());
         }
+
         public Credit Credit(
             int amount,
             string description,
@@ -102,14 +112,9 @@ namespace Balanced
             string debitUri,
             IDictionary<string, string> meta)
         {
-            IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["amount"] = amount;
-            if (description != null) { payload["description"] = description; }
-            if (destinationUri != null) { payload["destination_uri"] = destinationUri; }
-            if (appearsOnStatementAs != null) { payload["appears_on_statement_as"] = appearsOnStatementAs; }
-            if (meta != null) { payload["meta"] = meta; }
-            return Credits.Create(payload);
+            return Credits.Create(amount, description, destinationUri, appearsOnStatementAs, debitUri, meta);
         }
+
         public Debit Debit(
             int amount,
             string description,
@@ -118,15 +123,7 @@ namespace Balanced
             string onBehalfOfUri,
             IDictionary<string, string> meta)
         {
-            IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["amount"] = amount;
-            if (description != null) { payload["description"] = description; }
-            if (sourceUri != null) { payload["source_uri"] = sourceUri; }
-            if (appearsOnStatementAs != null) { payload["appears_on_statement_as"] = appearsOnStatementAs; }
-            if (onBehalfOfUri != null) { payload["on_behalf_of_uri"] = onBehalfOfUri; }
-            if (meta != null) { payload["meta"] = meta; }
-            return Debits.Create(payload);
+            return Debits.Create(amount, description, sourceUri, appearsOnStatementAs, onBehalfOfUri, meta);
         }
-        
     }
 }

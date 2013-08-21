@@ -59,7 +59,6 @@
     <Compile Include="Resource.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SimpleJson.cs" />
-    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -15,11 +15,11 @@ namespace Balanced
 
     public class Error : Exception
     {
-        public string Id;
-        public string CategoryType;
-        public string CategoryCode;
-        public string Description;
-        public Dictionary<String, object> Extras = new Dictionary<string, object>();
+        public string id;
+        public string category_type;
+        public string category_code;
+        public string description;
+        public Dictionary<String, object> extras = new Dictionary<string, object>();
 
         public static Error Create(IDictionary<string, object> data)
         {
@@ -51,14 +51,14 @@ namespace Balanced
 
         public virtual void Deserialize(IDictionary<string, object> data)
         {
-            Id = (string)data["request_id"];
-            CategoryType = (string)data["category_type"];
-            CategoryCode = (string)data["category_code"];
-            Description = (string)data["description"];
+            id = (string)data["request_id"];
+            category_type = (string)data["category_type"];
+            category_code = (string)data["category_code"];
+            description = (string)data["description"];
             if (data.ContainsKey("extras"))
-                Extras = new Dictionary<string, object>((IDictionary<string, object>)data["extras"]);
+                extras = new Dictionary<string, object>((IDictionary<string, object>)data["extras"]);
             else
-                Extras = new Dictionary<string, object>();
+                extras = new Dictionary<string, object>();
         }
     }
 

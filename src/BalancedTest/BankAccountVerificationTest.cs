@@ -39,7 +39,7 @@ namespace BalancedTest
         [TestMethod]
         public void TestExhaustedConfirm()
         {
-            while (bav.RemainingAttempts != 1)
+            while (bav.remaining_attempts != 1)
             {
                 try
                 {
@@ -48,7 +48,7 @@ namespace BalancedTest
                 catch (BankAccountVerificationFailure)
                 {
                     bav.Refresh();
-                    Assert.AreEqual(BankAccountVerification.Pending, bav.State);
+                    Assert.AreEqual(BankAccountVerification.pending, bav.state);
                 }
             }
             try
@@ -58,12 +58,12 @@ namespace BalancedTest
             catch (BankAccountVerificationFailure)
             {
                 bav.Refresh();
-                Assert.AreEqual(BankAccountVerification.Failed, bav.State);
+                Assert.AreEqual(BankAccountVerification.failed, bav.state);
             }
-            Assert.AreEqual(bav.RemainingAttempts, 0);
+            Assert.AreEqual(bav.remaining_attempts, 0);
             bav = ba.Verify();
             bav.Confirm(1, 1);
-            Assert.AreEqual(BankAccountVerification.Verified, bav.State);
+            Assert.AreEqual(BankAccountVerification.verified, bav.state);
         }
 
     }

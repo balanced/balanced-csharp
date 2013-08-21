@@ -27,12 +27,13 @@ namespace Balanced
             this.Deserialize(Payload);
         }
 
-        public virtual string RootUri
+        public virtual string root_uri
         {
             get
             {
                 return null;
             }
+            set { }
         }
 
         protected Client client;
@@ -47,39 +48,45 @@ namespace Balanced
             }
         }
 
-        public string Uri;
-        public string Id;
+        public string uri;
+        public string id;
 
         public virtual void Save()
         {
-            if (Uri != null)
+            if (uri == null && root_uri != null)
             {
                 Dictionary<string, object> data = new Dictionary<string, object>();
                 Serialize(data);
-                Deserialize(Client.Put(Uri, data));
+                Deserialize(Client.Post(root_uri, data));
+            }
+            else if (uri != null)
+            {
+                Dictionary<string, object> data = new Dictionary<string, object>();
+                Serialize(data);
+                Deserialize(Client.Put(uri, data));
             }
             else
             {
-                if (RootUri == null)
+                if (root_uri == null)
                 {
                     throw new Exception("Cannot create top level");
                 }
                 Dictionary<string, object> data = new Dictionary<string, object>();
                 Serialize(data);
-                Deserialize(Client.Post(RootUri, data));
+                Deserialize(Client.Post(root_uri, data));
             }
         }
 
         public virtual void Delete()
         {
-            client.Delete(Uri);
+            client.Delete(uri);
         }
 
         public virtual void Refresh()
         {
-            if (Uri == null)
+            if (uri == null)
                 throw new Exception("Cannot refresh before creation");
-            Deserialize(client.Get(Uri));
+            Deserialize(client.Get(uri));
         }
 
         public virtual void Serialize(IDictionary<string, object> data)
@@ -88,20 +95,22 @@ namespace Balanced
 
         public virtual void Deserialize(IDictionary<string, object> data)
         {
-            Uri = (String)data["uri"];
+            uri = (String)data["uri"];
 
             System.Reflection.PropertyInfo[] Properties = this.GetType().GetProperties();
             IEnumerable<string> PropertyNames = from x in Properties select x.Name;
-            IDictionary<string, string> PropertyNameLookup = new Dictionary<string, string>();
-            foreach (string PropertyName in PropertyNames)
+            foreach (KeyValuePair<string, Object> entry in data)
             {
-                PropertyNameLookup[Utilities.ConvertToPythonCase(PropertyName)] = PropertyName;
-            }
-            foreach (KeyValuePair<string, object> entry in data)
-            {
-                if (PropertyNameLookup.Keys.Any(x => x == entry.Key))
+                if (PropertyNames.Any(x => x == entry.Key))
                 {
-                    this.GetType().GetProperty(PropertyNameLookup[entry.Key]).SetValue(this, entry.Value);
+                    if (entry.Value is Balanced.JsonObject)
+                    {
+                        this.GetType().GetProperty(entry.Key).SetValue(this, Balanced.SimpleJson.Deserialize(entry.Value.ToString));
+                    }
+                    else
+                    {
+                        this.GetType().GetProperty(entry.Key).SetValue(this, entry.Value);
+                    }
                 }
             }
         }
@@ -112,16 +121,12 @@ namespace Balanced
 
             System.Reflection.PropertyInfo[] Properties = this.GetType().GetProperties();
             IEnumerable<string> PropertyNames = from x in Properties select x.Name;
-            IDictionary<string, string> PropertyNameLookup = new Dictionary<string, string>();
-            foreach (string PropertyName in PropertyNames)
-            {
-                PropertyNameLookup[Utilities.ConvertToPythonCase(PropertyName)] = PropertyName;
-            }
             foreach (KeyValuePair<string, string> entry in dst)
             {
-                if (PropertyNameLookup.Keys.Any(x => x == entry.Key))
+                if (PropertyNames.Any(x => x == entry.Key))
                 {
-                    this.GetType().GetProperty(PropertyNameLookup[entry.Key]).SetValue(this, entry.Value);
+                    var clsProperty = this.GetType().GetProperty(entry.Key);
+                    clsProperty.SetValue(this, entry.Value);
                 }
             }
         }
@@ -137,7 +142,7 @@ namespace Balanced
     {
         public ResourcePage(string uri)
         {
-            Uri = uri;
+            this.uri = uri;
         }
 
         public ResourcePage(IDictionary<string, object> data)
@@ -145,72 +150,72 @@ namespace Balanced
             Deserialize(data);
         }
 
-        public string Uri;
-        public List<T> _Items;
-        public long _Total;
-        public string _FirstUri;
-        public string _PreviousUri;
-        public string _NextUri;
-        public string _LastUri;
-        protected Client _Client;
+        public string uri;
+        public List<T> _items;
+        public long _total;
+        public string _first_uri;
+        public string _previous_uri;
+        public string _next_uri;
+        public string _last_uri;
+        protected Client _client;
 
         public Client Client
         {
             get
             {
-                if (_Client == null)
-                    _Client = new Client();
-                return _Client;
+                if (_client == null)
+                    _client = new Client();
+                return _client;
             }
         }
 
-        public List<T> Items
+        public List<T> items
         {
             get
             {
                 if (!Loaded)
                     Load();
-                return _Items;
+                return _items;
             }
         }
 
-        public long Total
+        public long total
         {
             get
             {
                 if (!Loaded)
                     Load();
-                return _Total;
+                return _total;
             }
         }
 
-        public string FirstUri
+        public string first_uri
         {
             get
             {
                 if (!Loaded)
                     Load();
-                return _FirstUri;
+                return _first_uri;
             }
         }
 
-        public ResourcePage<T> First
+        public ResourcePage<T> first
         {
             get
             {
-                if (FirstUri == null)
+                if (first_uri == null)
                     return null;
-                return new ResourcePage<T>(FirstUri);
+                return new ResourcePage<T>(first_uri);
             }
         }
 
-        public string PreviousUri
+        public string previous_uri
         {
             get
             {
                 if (!Loaded)
                     Load();
-                return _PreviousUri;
+                return _previous_uri;
             }
         }
 
@@ -218,19 +223,19 @@ namespace Balanced
         {
             get
             {
-                if (PreviousUri == null)
+                if (previous_uri == null)
                     return null;
-                return new ResourcePage<T>(PreviousUri);
+                return new ResourcePage<T>(previous_uri);
             }
         }
 
-        public string NextUri
+        public string next_uri
         {
             get
             {
                 if (!Loaded)
                     Load();
-                return _NextUri;
+                return _next_uri;
             }
         }
 
@@ -238,9 +243,9 @@ namespace Balanced
         {
             get
             {
-                if (NextUri == null)
+                if (next_uri == null)
                     return null;
-                return new ResourcePage<T>(NextUri);
+                return new ResourcePage<T>(next_uri);
             }
         }
 
@@ -250,7 +255,7 @@ namespace Balanced
             {
                 if (!Loaded)
                     Load();
-                return _LastUri;
+                return _last_uri;
             }
         }
 
@@ -268,24 +273,24 @@ namespace Balanced
         {
             get
             {
-                return _Items != null;
+                return _items != null;
             }
         }
 
         protected void Load()
         {
-            Deserialize(Client.Get(Uri));
+            Deserialize(Client.Get(uri));
         }
 
         protected virtual void Deserialize(IDictionary<string, object> data)
         {
-            Uri = (string)data["uri"];
-            _Items = ((IList<object>)data["items"]).Select(v => DeserializeItem((IDictionary<string, object>)v)).ToList();
-            _FirstUri = (string)data["first_uri"];
-            _PreviousUri = (string)data["previous_uri"];
-            _NextUri = (string)data["next_uri"];
-            _LastUri = (string)data["last_uri"];
-            _Total = (long)data["total"];
+            this.uri = (string)data["uri"];
+            _items = ((IList<object>)data["items"]).Select(v => DeserializeItem((IDictionary<string, object>)v)).ToList();
+            _first_uri = (string)data["first_uri"];
+            _previous_uri = (string)data["previous_uri"];
+            _next_uri = (string)data["next_uri"];
+            _last_uri = (string)data["last_uri"];
+            _total = (long)data["total"];
         }
 
         protected static T DeserializeItem(IDictionary<string, object> data)
@@ -299,18 +304,18 @@ namespace Balanced
     public class ResourcePagination<T> : IEnumerable<T>
         where T : Resource, new()
     {
-        protected string Path;
-        protected NameValueCollection Parameters;
-        protected Client _Client;
-        protected Type Cls;
+        protected string path;
+        protected NameValueCollection parameters;
+        protected Client _client;
+        protected Type cls;
 
         public Client Client
         {
             get
             {
-                if (_Client == null)
-                    _Client = new Client();
-                return _Client;
+                if (_client == null)
+                    _client = new Client();
+                return _client;
             }
         }
 
@@ -319,56 +324,56 @@ namespace Balanced
             int i = uri.IndexOf('?');
             if (i == -1)
             {
-                Path = uri;
-                Parameters = HttpUtility.ParseQueryString(string.Empty);
+                path = uri;
+                parameters = HttpUtility.ParseQueryString(string.Empty);
             }
             else
             {
-                Path = uri.Substring(0, i);
-                Parameters = HttpUtility.ParseQueryString(uri.Substring(i));
+                path = uri.Substring(0, i);
+                parameters = HttpUtility.ParseQueryString(uri.Substring(i));
             }
         }
         public ResourcePagination(Type cls, string uri) 
         {
-            this.Cls = cls;
+            this.cls = cls;
         }
 
 
-        public string Uri
+        public string uri
         {
             get
             {
-                if (Parameters.Count == 0)
+                if (parameters.Count == 0)
                 {
-                    return Path;
+                    return path;
                 }
-                return Path + "?" + Parameters.ToString();
+                return path + "?" + parameters.ToString();
             }
         }
 
-        public int? Limit
+        public int? limit
         {
             get
             {
-                if (Parameters["limit"] == null)
+                if (parameters["limit"] == null)
                     return null;
-                return int.Parse(Parameters["limit"]);
+                return int.Parse(parameters["limit"]);
             }
             set
             {
-                Parameters["limit"] = value.ToString();
+                parameters["limit"] = value.ToString();
             }
         }
 
-        public long Total
+        public long total
         {
             get
             {
-                int? limit = Limit;
-                Limit = 1;
-                ResourcePage<T> current = new ResourcePage<T>(Uri);
-                long total = current.Total;
-                Limit = limit;
+                int? limit = this.limit;
+                limit = 1;
+                ResourcePage<T> current = new ResourcePage<T>(uri);
+                long total = current.total;
+                this.limit = limit;
                 return total;
             }
         }
@@ -376,10 +381,10 @@ namespace Balanced
 
         public T First()
         {
-            int? limit = Limit;
-            Limit = 1;
+            int? limit = this.limit;
+            this.limit = 1;
             IList<T> items = All();
-            Limit = limit;
+            this.limit = limit;
             if (items.Count == 0)
                 return null;
             return items[0];
@@ -387,10 +392,10 @@ namespace Balanced
 
         public T One()
         {
-            int? limit = Limit;
-            Limit = 2;
+            int? limit = this.limit;
+            this.limit = 2;
             IList<T> items = All();
-            Limit = limit;
+            this.limit = limit;
             if (items.Count == 0)
                 throw new NoResultsFound();
             if (items.Count > 1)
@@ -405,10 +410,10 @@ namespace Balanced
 
         public IEnumerator<T> GetEnumerator()
         {
-            ResourcePage<T> current = new ResourcePage<T>(Uri);
+            ResourcePage<T> current = new ResourcePage<T>(uri);
             while (current != null)
             {
-                foreach (T i in current.Items)
+                foreach (T i in current.items)
                 {
                     yield return i;
                 }
@@ -438,7 +443,7 @@ namespace Balanced
         {
             string n = String.Format("{0}", field);
             string v = String.Join(",", new List<string>(Serialize(values)));
-            Parameters.Add(n, v);
+            parameters.Add(n, v);
             return this;
         }
 
@@ -446,7 +451,7 @@ namespace Balanced
         {
             string n = String.Format("{0}[{1}]", field, op);
             string v = String.Join(",", new List<string>(Serialize(values)));
-            Parameters.Add(n, v);
+            parameters.Add(n, v);
             return this;
         }
 
@@ -469,14 +474,14 @@ namespace Balanced
 
         public ResourceQuery<T> OrderBy(string field)
         {
-            Parameters.Add("sort", field);
+            parameters.Add("sort", field);
             return this;
         }
 
         public ResourceQuery<T> OrderBy(string field, ResourceQueryOrder direction)
         {
             string sort = String.Format("{0},{1}", field, direction == ResourceQueryOrder.ASCENDING ? "asc" : "desc");
-            Parameters.Add("sort", sort);
+            parameters.Add("sort", sort);
             return this;
         }
     }
@@ -490,7 +495,7 @@ namespace Balanced
 
         public T Create(IDictionary<string, object> data)
         {
-            IDictionary<string, object> result = (IDictionary<string, object>)Client.Post(Uri, data);
+            IDictionary<string, object> result = (IDictionary<string, object>)Client.Post(uri, data);
             T t = new T();
             t.Deserialize(result);
             return t;
@@ -500,7 +505,7 @@ namespace Balanced
         {
             get
             {
-                return new ResourceQuery<T>(Uri);
+                return new ResourceQuery<T>(uri);
             }
         }
     }

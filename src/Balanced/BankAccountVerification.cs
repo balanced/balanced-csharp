@@ -16,13 +16,12 @@ namespace Balanced
             }
         }
 
-        public const string Pending = "pending";
-        public const string Failed = "failed";
-        public const string Verified = "verified";
-        public string Id { get; set; }
-        public long Attempts { get; set; }
-        public long RemainingAttempts { get; set; }
-        public string State { get; set; }
+        public const string pending = "pending";
+        public const string failed = "failed";
+        public const string verified = "verified";
+        public long attempts { get; set; }
+        public long remaining_attempts { get; set; }
+        public string state { get; set; }
 
         public BankAccountVerification() : base() {}
 
@@ -33,11 +32,6 @@ namespace Balanced
         public override void Deserialize(IDictionary<string, object> data)
         {
             base.Deserialize(data);
-
-            Id = (string)data["id"];
-            State = (string)data["state"];
-            Attempts = (long)data["attempts"];
-            RemainingAttempts = (long)data["remaining_attempts"];
         }
 
         public void Confirm(int amount_1, int amount_2)
@@ -45,7 +39,7 @@ namespace Balanced
             var data = new Dictionary<string, object>();
             data["amount_1"] = amount_1;
             data["amount_2"] = amount_2;
-            Deserialize((IDictionary<string, object>)Client.Put(Uri, data));
+            Deserialize((IDictionary<string, object>)Client.Put(uri, data));
         }
     }
 }

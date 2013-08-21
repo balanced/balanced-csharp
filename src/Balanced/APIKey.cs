@@ -19,7 +19,7 @@ namespace Balanced
         public Dictionary<string, string> Meta = new Dictionary<string, string>();
         public string Secret;
 
-        public override string RootUri
+        public override string root_uri
         {
             get
             {

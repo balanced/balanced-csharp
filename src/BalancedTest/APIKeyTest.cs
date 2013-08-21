@@ -47,9 +47,9 @@ namespace BalancedTest
             Settings.configure(key.Secret);
             key = new APIKey();
             key.Save();
-            Assert.AreEqual(2, APIKey.Query.Total);
+            Assert.AreEqual(2, APIKey.Query.total);
             key.Delete();
-            Assert.AreEqual(1, APIKey.Query.Total);
+            Assert.AreEqual(1, APIKey.Query.total);
         }
 
         [TestMethod]

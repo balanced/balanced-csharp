@@ -11,21 +11,22 @@ namespace Balanced
         public const string BUYER_ROLE = "buyer";       
         public const string MERCHANT_ROLE = "merchant";
 
-        public DateTime CreatedAt { get; set; }
-        public string Name { get; set; }
-        public string EmailAddress { get; set; }
-        public string[] Roles { get; set; }
-        public string BankAccountsUri { get; set; }
-        public BankAccount.Collection BankAccounts { get; set; }
-        public string CardsUri { get; set; }
-        public Card.Collection Cards { get; set; }
-        public string CreditsUri { get; set; }
-        public Credit.Collection Credits { get; set; }
-        public string DebitsUri { get; set; }
+        public DateTime created_at { get; set; }
+        public string name { get; set; }
+        public string email_address { get; set; }
+        public string[] roles { get; set; }
+        public string bank_accounts_uri { get; set; }
+        public string cards_uri { get; set; }
+        public string credits_uri { get; set; }
+        public string debits_uri { get; set; }
+        public string holds_uri { get; set; }
+        public Dictionary<String, String> meta { get; set; }
+
         public Debit.Collection Debits { get; set; }
-        public string HoldsUri { get; set; }
+        public Credit.Collection Credits { get; set; }
         public Hold.Collection Holds { get; set; }
-        public Dictionary<String, String> Meta { get; set; }           
+        public Card.Collection Cards { get; set; }
+        public BankAccount.Collection BankAccounts { get; set; }           
         
         public class Collection : ResourceCollection<Account>
         {
@@ -41,15 +42,25 @@ namespace Balanced
 
         public Account(IDictionary<string, Object> payload) : base(payload)  {}                                                                  
 
-        public Account(string uri) : base(uri) {}  
+        public Account(string uri) : base(uri) {}
+
+        public override void Deserialize(IDictionary<string, object> data)
+        {
+            base.Deserialize(data);
+            Debits = new Debit.Collection(debits_uri);
+            Credits = new Credit.Collection(credits_uri);
+            Holds = new Hold.Collection(holds_uri);
+            Cards = new Card.Collection(cards_uri);
+            BankAccounts = new BankAccount.Collection(bank_accounts_uri);
+        }
 
         public Credit Credit(int amount, 
                              string description,
-                             string destinationUri,
-                             string appearsOnStatementAs,
+                             string destination_uri,
+                             string appears_on_statement_as,
                              IDictionary<string, string> meta)
         {
-            return Credits.Create(amount, description, destinationUri, appearsOnStatementAs, null, meta);
+            return Credits.Create(amount, description, destination_uri, appears_on_statement_as, null, meta);
         }
 
         public Credit Credit(int amount) {
@@ -58,11 +69,11 @@ namespace Balanced
         
         public Debit Debit(int amount, 
                            string description,
-                           string sourceUri,
-                           string appearsOnStatementAs,
+                           string source_uri,
+                           string appears_on_statement_as,
                            IDictionary<string, string> meta)
         {
-            return Debits.Create(amount, description, sourceUri, appearsOnStatementAs, null, meta);
+            return Debits.Create(amount, description, source_uri, appears_on_statement_as, null, meta);
         }
 
         public Debit Debit(int amount) {
@@ -71,45 +82,45 @@ namespace Balanced
 
         public Hold Hold(int amount, 
                          string description,
-                         string sourceUri,
+                         string source_uri,
                          IDictionary<string, string> meta)
         {
-            return Holds.Create(amount, description, sourceUri, meta);
+            return Holds.Create(amount, description, source_uri, meta);
         }
 
         public Hold hold(int amount) {
             return Hold(amount, null, null, null);
         }
 
-        public void AssociateBankAccount(string bankAccountUri)
+        public void AssociateBankAccount(string bank_account_uri)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["bank_account_uri"] = bankAccountUri;
-            IDictionary<string, object> response = Client.Put(Uri, payload);
+            payload["bank_account_uri"] = bank_account_uri;
+            IDictionary<string, object> response = Client.Put(uri, payload);
             Deserialize(response);
         }
 
-        public void PromoteToMerchant(IDictionary<string, object> merchantMap)
+        public void PromoteToMerchant(IDictionary<string, object> merchant)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["merchant"] = merchantMap;
-            IDictionary<string, object> response = Client.Put(Uri, payload);
+            payload["merchant"] = merchant;
+            IDictionary<string, object> response = Client.Put(uri, payload);
             Deserialize(response);
         }
 
-        public void PromoteToMerchant(string merchantUri)
+        public void PromoteToMerchant(string merchant_uri)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["merchant_uri"] = merchantUri;
-            IDictionary<string, object> response = Client.Put(Uri, payload);
+            payload["merchant_uri"] = merchant_uri;
+            IDictionary<string, object> response = Client.Put(uri, payload);
             Deserialize(response);
         }
 
-        public void AssociateCard(String cardUri)
+        public void AssociateCard(String card_uri)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["card_uri"] = cardUri;
-            IDictionary<string, object> response = Client.Put(Uri, payload);
+            payload["card_uri"] = card_uri;
+            IDictionary<string, object> response = Client.Put(uri, payload);
             Deserialize(response);  
         }
 

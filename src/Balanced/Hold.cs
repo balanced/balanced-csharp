@@ -8,18 +8,22 @@ namespace Balanced
 {
     public class Hold : Resource
     {
-        public DateTime CreatedAt { get; set; }
-        public Dictionary<String, String> Meta { get; set; }
-        public int Amount { get; set; }
-        public DateTime ExpiresAt { get; set; }
-        public String Description{ get; set; }
-        public Debit Debit { get; set; }
-        public String TransactionNumber { get; set; }
-        public Boolean IsVoid { get; set; }
-        public String AccountUri { get; set; }
+        public DateTime created_at { get; set; }
+        public Dictionary<String, String> meta { get; set; }
+        public int amount { get; set; }
+        public DateTime expires_at { get; set; }
+        public String description{ get; set; }
+        public String transaction_number { get; set; }
+        public Boolean is_void { get; set; }
+        public String account_uri { get; set; }
+        public String card_uri { get; set; }
+        public String customer_uri { get; set; }
+        public String debit_uri { get; set; }
+
+        public Customer Customer { get; set; }
         public Account Account { get; set; }
-        public String CardUri { get; set; }
         public Card Card { get; set; }
+        public Debit Debit { get; set; }
 
         public Hold() : base() { }
 
@@ -50,6 +54,15 @@ namespace Balanced
             return new Hold((new Client()).Get(uri));
         }
 
+        public override void Deserialize(IDictionary<string, object> data)
+        {
+            base.Deserialize(data);
+            Customer = new Customer(customer_uri);
+            Account = new Account(account_uri);
+            Card = new Card(card_uri);
+            Debit = new Debit(debit_uri);
+        }
+
         public Account GetAccount()
         {
             if (Account == null)
@@ -66,15 +79,15 @@ namespace Balanced
 
         public void Void_()
         {
-            IsVoid = true;
+            is_void = true;
             Save();
         }
 
         public Debit Capture(int amount)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["hold_uri"] = Uri;
-            payload["amount"] = Amount;
+            payload["hold_uri"] = uri;
+            payload["amount"] = amount;
             Debit = Account.Debits.Create(payload);
             return Debit;
         }
@@ -82,7 +95,7 @@ namespace Balanced
         public Debit Capture()
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["hold_uri"] = Uri;
+            payload["hold_uri"] = uri;
             Debit = Account.Debits.Create(payload);
             return Debit;
         }

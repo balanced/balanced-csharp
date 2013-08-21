@@ -8,31 +8,31 @@ namespace Balanced
 {
     public class Customer : Resource
     {
-        protected Client Client = new Client();
-        public Dictionary<String, String> Address { get; set; }
-        public String BankAccountsUri { get; set; }
+        public Dictionary<String, String> address { get; set; }
+        public String bank_accounts_uri { get; set; }
+        public String business_name { get; set; }
+        public String cards_uri { get; set; }
+        public String credits_uri { get; set; }
+        public String debits_uri { get; set; }
+        public String dob { get; set; }
+        public String ein { get; set; }
+        public String email { get; set; }
+        public String facebook { get; set; }
+        public String holds_uri { get; set; }
+        public Boolean is_identity_verified { get; set; }
+        public Dictionary<String, String> meta { get; set; }
+        public String name { get; set; }
+        public String phone { get; set; }
+        public String refunds_uri { get; set; }
+        public String ssn_last4 { get; set; }
+        public String twitter { get; set; }
+
         public BankAccount.Collection BankAccounts { get; set; }
-        public String BusinessName { get; set; }
-        public String CardsUri { get; set; }
         public Card.Collection Cards { get; set; }
-        public String CreditsUri { get; set; }
-        public Credit.Collection Credits { get; set; }
-        public String DebitsUri { get; set; }
-        public Debit.Collection Debits { get; set; }
-        public String Dob { get; set; }
-        public String Ein { get; set; }
-        public String Email { get; set; }
-        public String Facebook { get; set; }
-        public String HoldsUri { get; set; }
         public Hold.Collection Holds { get; set; }
-        public Boolean IsIdentityVerified { get; set; }
-        public Dictionary<String, String> Meta { get; set; }
-        public String Name { get; set; }
-        public String Phone { get; set; }
-        public String RefundsUri { get; set; }
+        public Credit.Collection Credits { get; set; }
+        public Debit.Collection Debits { get; set; }
         public Refund.Collection Refunds { get; set; }
-        public String SsnLast4 { get; set; }
-        public String Twitter { get; set; }
 
         public Customer() : base() { }
         public Customer(string uri) : base(uri) { }
@@ -55,24 +55,35 @@ namespace Balanced
 
         public override void Save()
         {
-            if (Id == null && Uri == null)
+            if (id == null && uri == null)
             {
-                Uri = String.Format("/v%s/%s", Settings.Version, "customers");
+                uri = String.Format("/v%s/%s", Settings.Version, "customers");
             }
             base.Save();
+        }
+
+        public override void Deserialize(IDictionary<string, object> data)
+        {
+            base.Deserialize(data);
+            BankAccounts = new BankAccount.Collection(bank_accounts_uri);
+            Cards = new Card.Collection(cards_uri);
+            Holds = new Hold.Collection(holds_uri);
+            Credits = new Credit.Collection(credits_uri);
+            Debits = new Debit.Collection(debits_uri);
+            Refunds = new Refund.Collection(refunds_uri);
         }
 
         public void AddBankAccount(string bankAccountUri)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
             payload["bank_account_uri"] = bankAccountUri;
-            IDictionary<string, object> response = Client.Put(Uri, payload);
+            IDictionary<string, object> response = Client.Put(uri, payload);
             Deserialize(response);
         }
 
         public void AddBankAccount(BankAccount bankAccount)
         {
-            AddBankAccount(bankAccount.Uri);
+            AddBankAccount(bankAccount.uri);
         }
 
         public BankAccount ActiveBankAccount()
@@ -83,17 +94,17 @@ namespace Balanced
                                 .First());
         }
 
-        public void AddCard(string cardUri)
+        public void AddCard(string card_uri)
         {
             IDictionary<string, object> payload = new Dictionary<string, object>();
-            payload["card_uri"] = cardUri;
-            IDictionary<string, object> response = Client.Put(Uri, payload);
+            payload["card_uri"] = card_uri;
+            IDictionary<string, object> response = Client.Put(uri, payload);
             Deserialize(response);
         }
 
         public void AddCard(Card card)
         {
-            AddCard(card.Uri);
+            AddCard(card.uri);
         }
 
         public Card ActiveCard()

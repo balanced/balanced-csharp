@@ -12,11 +12,11 @@ namespace BalancedTest
         [TestMethod]
         public void TestCreate()
         {
-            var ba = new BankAccount();
-            ba.Name = "Homer Jay";
-            ba.AccountNumber = "112233a";
-            ba.RoutingNumber = "121042882";
-            ba.Type = BankAccount.Checking;
+            BankAccount ba = new BankAccount();
+            ba.name = "Homer Jay";
+            ba.account_number = "112233a";
+            ba.routing_number = "121042882";
+            ba.type = BankAccount.checking;
             ba.Save();
         }
     }

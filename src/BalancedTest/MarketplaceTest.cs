@@ -18,10 +18,10 @@ namespace BalancedTest
             Settings.configure(key.Secret);
 
             var mp = new Marketplace();
-            Assert.IsNull(mp.Id);
+            Assert.IsNull(mp.id);
             mp.Save();
 
-            Assert.IsNotNull(mp.Id);
+            Assert.IsNotNull(mp.id);
         }
 
         [TestMethod]
@@ -42,10 +42,10 @@ namespace BalancedTest
             Settings.configure(key.Secret);
 
             var mp = new Marketplace();
-            Assert.IsNull(mp.Id);
+            Assert.IsNull(mp.id);
             mp.Save();
 
-            Assert.AreEqual(mp.Id, Marketplace.Mine.Id);
+            Assert.AreEqual(mp.id, Marketplace.Mine.id);
         }
 
         [TestMethod]
@@ -70,9 +70,9 @@ namespace BalancedTest
                 "121042882"
                 );
 
-            Assert.AreEqual(ba.Name, "Homer Jay");
-            Assert.AreEqual(ba.AccountNumber, "xxx233a");
-            Assert.AreEqual(ba.RoutingNumber, "121042882");
+            Assert.AreEqual(ba.name, "Homer Jay");
+            Assert.AreEqual(ba.account_number, "xxx233a");
+            Assert.AreEqual(ba.routing_number, "121042882");
         }
 
         [TestMethod]
@@ -88,10 +88,10 @@ namespace BalancedTest
                     "123",
                     12,
                     2013);
-            Assert.AreEqual(card.Name, "Homer Jay");
-            Assert.AreEqual(card.LastFour, "4113");
-            Assert.AreEqual(card.ExpirationYear, 2013);
-            Assert.AreEqual(card.ExpirationMonth, 12);
+            Assert.AreEqual(card.name, "Homer Jay");
+            Assert.AreEqual(card.last_four, "4113");
+            Assert.AreEqual(card.expiration_year, 2013);
+            Assert.AreEqual(card.expiration_month, 12);
         }
     }
 }

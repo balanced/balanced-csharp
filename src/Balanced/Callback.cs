@@ -8,7 +8,7 @@ namespace Balanced
 {
     public class Callback : Resource
     {
-        public string Url { get; set; }
+        public string url { get; set; }
 
         public class Collection : ResourceCollection<Callback>
         {
@@ -17,8 +17,8 @@ namespace Balanced
             public Callback Create(string url)
             {
                 Callback callback = new Callback();
-                callback.Uri = this.Uri;
-                callback.Url = url;
+                callback.uri = this.uri;
+                callback.url = url;
                 callback.Save();
                 return callback;
             }

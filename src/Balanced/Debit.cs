@@ -8,18 +8,21 @@ namespace Balanced
 {
     public class Debit : Resource
     {
-        public DateTime CreatedAt { get; set; }
-        public Dictionary<String, String> Meta { get; set; }
-        public int Amount { get; set; }
-        public String Description { get; set; }
-        public String TransactionNumber { get; set; }
-        public Card Card { get; set; }
-        public String CardUri { get; set; }
-        public String AccountUri { get; set; }
-        public Account Account { get; set; }
-        public String HoldUri { get; set; }
+        public DateTime created_at { get; set; }
+        public Dictionary<String, String> meta { get; set; }
+        public int amount { get; set; }
+        public String description { get; set; }
+        public String transaction_number { get; set; }
+        public String card_uri { get; set; }
+        public String account_uri { get; set; }
+        public String hold_uri { get; set; }
+        public String refunds_uri { get; set; }
+        public String customer_uri { get; set; }
+
         public Hold Hold { get; set; }
-        public String RefundsUri { get; set; }
+        public Account Account { get; set; }
+        public Customer Customer { get; set; }
+        public Card Card { get; set; }
         public Refund.Collection Refunds { get; set; }
 
         public class Collection : ResourceCollection<Debit>
@@ -47,7 +50,19 @@ namespace Balanced
 
         public Debit() : base() {}
 
+        public Debit(String uri) : base(uri) { }
+
         public Debit(IDictionary<string, object> payload) : base(payload) { }
+
+        public override void Deserialize(IDictionary<string, object> data)
+        {
+            base.Deserialize(data);
+            Hold = new Hold(hold_uri);
+            Account = new Account(account_uri);
+            Customer = new Customer(customer_uri);
+            Card = new Card(card_uri);
+            Refunds = new Refund.Collection(refunds_uri);
+        }
 
         public Refund Refund(
             int amount,
@@ -70,21 +85,21 @@ namespace Balanced
         public Account GetAccount()
         {
             if (Account == null)
-                Account = new Account(AccountUri);
+                Account = new Account(account_uri);
             return Account;
         }
 
         public Card GetCard()
         {
             if (Card == null)
-                Card = new Card(CardUri);
+                Card = new Card(card_uri);
             return Card;
         }
 
         public Hold GetHold()
         {
             if (Hold == null)
-                Hold = new Hold(HoldUri);
+                Hold = new Hold(hold_uri);
             return Hold;
         }
     }

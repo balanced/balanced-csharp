@@ -6,11 +6,29 @@ namespace Balanced
 {
     public class BankAccount : Resource
     {
+
+        public const string checking = "checking";
+        public const string savings = "savings";
+        public DateTime created_at { get; set; }
+        public Dictionary<string, string> meta { get; set; }
+        public string name { get; set; }
+        public string account_number { get; set; }
+        public string routing_number { get; set; }
+        public string type { get; set; }
+        public string fingerprint { get; set; }
+        public string bank_name { get; set; }
+        public string verification_uri { get; set; }
+        public string verifications_uri { get; set; }
+
+        public BankAccountVerification.Collection Verifications { get; set; }
+
+        public override string root_uri { get { return "/v1/bank_accounts"; } }
+
         public static ResourceQuery<Marketplace> Query
         {
             get
             {
-                return new ResourceQuery<Marketplace>(typeof(Marketplace), RootUri);
+                return new ResourceQuery<Marketplace>(typeof(Marketplace), "/v1/bank_accounts");
             }
         }
 
@@ -21,60 +39,34 @@ namespace Balanced
             public BankAccount Create(string name, string accountNumber, string routingNumber)
             {
                 var i = new BankAccount();
-                i.Name = name;
-                i.AccountNumber = accountNumber;
-                i.RoutingNumber = routingNumber;
+                i.name = name;
+                i.account_number = accountNumber;
+                i.routing_number = routingNumber;
                 Dictionary<string, object> data = new Dictionary<string, object>();
                 i.Serialize(data);
                 return base.Create(data);
             }
         }
 
-        public const string Checking = "checking";
-        public const string Savings = "savings";
-        public string Id { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public Dictionary<string, string> Meta { get; set; }
-        public string Name { get; set; }
-        public string AccountNumber { get; set; }
-        public string RoutingNumber { get; set; }
-        public string Type { get; set; }
-        public string Fingerprint { get; set; }
-        public string BankName { get; set; }
-        public string VerificationsUri { get; set; }
-        public BankAccountVerification.Collection Verifications { get; set; }
-        public string VerificationUri { get; set; }
-        
-        protected static String RootUri = "/v" + Settings.Version + "/bank_accounts"; 
+        public BankAccount() : base() {}
+        public BankAccount(string uri) : base(uri) { }
+        public BankAccount(Dictionary<String, Object> payload) : base(payload) { }
 
         public override void Serialize(IDictionary<string, object> data)
         {
             base.Serialize(data);
-
-            data["meta"] = Meta;
-            data["name"] = Name;
-            data["account_number"] = AccountNumber;
-            data["routing_number"] = RoutingNumber;
-            if (Type != null)
-                data["type"] = Type;
+            data["meta"] = meta;
+            data["name"] = name;
+            data["account_number"] = account_number;
+            data["routing_number"] = routing_number;
+            if (type != null)
+                data["type"] = type;
         }
 
         public override void Deserialize(IDictionary<string, object> data)
         {
             base.Deserialize(data);
-
-            //Id = (string)data["id"];
-            //Deserialize(data["created_at"], out CreatedAt);
-            //Deserialize(data["meta"], out Meta);
-            //Name = (string)data["name"];
-            //AccountNumber = (string)data["account_number"];
-            //RoutingNumber = (string)data["routing_number"];
-            //Type = (string)data["type"];
-            //Fingerprint = (string)data["fingerprint"];
-            //BankName = (string)data["bank_name"];
-            //VerificationsUri = (string)data["verifications_uri"];
-            //Verifications = new BankAccountVerification.Collection(VerificationsUri);
-            //VerificationUri = (string)data["verification_uri"];
+            Verifications = new BankAccountVerification.Collection(verifications_uri);
         }
 
         public BankAccountVerification Verify()
@@ -84,20 +76,16 @@ namespace Balanced
 
         public override void Save()
         {
-            if (Id == null && Uri == null)
-            {
-                Uri = RootUri;
-            }
             base.Save();
         }
 
         public BankAccountVerification GetVerification()
         {
-            if (VerificationUri == null)
+            if (verification_uri == null)
             {
                 return null;
             }
-            return new BankAccountVerification(VerificationUri);
+            return new BankAccountVerification(verification_uri);
         }
     }
 }

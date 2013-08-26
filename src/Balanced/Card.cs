@@ -48,7 +48,7 @@ namespace Balanced
         }
 
         public DateTime created_at { get; set; }
-        public Dictionary<string, string> meta { get; set; }
+        public IDictionary<string, object> meta { get; set; }
         public string street_address { get; set; }
         public string postal_code { get; set; }
         public string country_code { get; set; }

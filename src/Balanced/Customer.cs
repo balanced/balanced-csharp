@@ -20,7 +20,7 @@ namespace Balanced
         public String facebook { get; set; }
         public String holds_uri { get; set; }
         public Boolean is_identity_verified { get; set; }
-        public Dictionary<String, String> meta { get; set; }
+        public IDictionary<string, object> meta { get; set; }
         public String name { get; set; }
         public String phone { get; set; }
         public String refunds_uri { get; set; }

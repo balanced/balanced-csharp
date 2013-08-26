@@ -9,7 +9,7 @@ namespace Balanced
     public class Refund : Resource
     {
         public DateTime created_at { get; set; }
-        public Dictionary<String, String> meta { get; set; }
+        public IDictionary<string, object> meta { get; set; }
         public int amount { get; set; }
         public string description { get; set; }
         public string appears_on_statement_as { get; set; }

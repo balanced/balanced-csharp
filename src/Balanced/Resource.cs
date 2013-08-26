@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Web;
+using System.Diagnostics;
 
 
 namespace Balanced
@@ -103,14 +104,17 @@ namespace Balanced
             {
                 if (PropertyNames.Any(x => x == entry.Key))
                 {
-                    if (entry.Value is Balanced.JsonObject)
+                    var clsProperty = this.GetType().GetProperty(entry.Key);
+                    if (clsProperty.PropertyType.Name == "DateTime")
                     {
-                        this.GetType().GetProperty(entry.Key).SetValue(this, Balanced.SimpleJson.Deserialize(entry.Value.ToString));
+                        DateTime dttm = DateTime.Parse((string)entry.Value, null, DateTimeStyles.RoundtripKind);
+                        clsProperty.SetValue(this, dttm);
                     }
                     else
                     {
-                        this.GetType().GetProperty(entry.Key).SetValue(this, entry.Value);
+                        clsProperty.SetValue(this, entry.Value);
                     }
+
                 }
             }
         }

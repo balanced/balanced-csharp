@@ -9,7 +9,7 @@ namespace Balanced
     public class Debit : Resource
     {
         public DateTime created_at { get; set; }
-        public Dictionary<String, String> meta { get; set; }
+        public IDictionary<string, object> meta { get; set; }
         public int amount { get; set; }
         public String description { get; set; }
         public String transaction_number { get; set; }

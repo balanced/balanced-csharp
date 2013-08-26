@@ -15,7 +15,7 @@ namespace Balanced
         public BankAccount bank_account { get; set; }
         public String account_uri { get; set; }
         public String customer_uri { get; set; }
-        public Dictionary<String, String> meta { get; set; }
+        public IDictionary<string, object> meta { get; set; }
 
         public Account Account { get; set; }
         public Customer Customer { get; set; }

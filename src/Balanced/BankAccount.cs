@@ -10,7 +10,7 @@ namespace Balanced
         public const string checking = "checking";
         public const string savings = "savings";
         public DateTime created_at { get; set; }
-        public Dictionary<string, string> meta { get; set; }
+        public IDictionary<string, object> meta { get; set; }
         public string name { get; set; }
         public string account_number { get; set; }
         public string routing_number { get; set; }

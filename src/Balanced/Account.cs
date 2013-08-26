@@ -20,7 +20,7 @@ namespace Balanced
         public string credits_uri { get; set; }
         public string debits_uri { get; set; }
         public string holds_uri { get; set; }
-        public Dictionary<String, String> meta { get; set; }
+        public IDictionary<string, object> meta { get; set; }
 
         public Debit.Collection Debits { get; set; }
         public Credit.Collection Credits { get; set; }

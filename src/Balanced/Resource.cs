@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Diagnostics;
 
@@ -105,16 +106,31 @@ namespace Balanced
                 if (PropertyNames.Any(x => x == entry.Key))
                 {
                     var clsProperty = this.GetType().GetProperty(entry.Key);
-                    if (clsProperty.PropertyType.Name == "DateTime")
+                    switch(clsProperty.PropertyType.Name)
                     {
-                        DateTime dttm = DateTime.Parse((string)entry.Value, null, DateTimeStyles.RoundtripKind);
-                        clsProperty.SetValue(this, dttm);
-                    }
-                    else
-                    {
-                        clsProperty.SetValue(this, entry.Value);
-                    }
+                        case "DateTime":
+                            {
+                                DateTime dttm = DateTime.Parse((string)entry.Value, null, DateTimeStyles.RoundtripKind);
+                                clsProperty.SetValue(this, dttm, null);
+                                break;
+                            }
+                        case "Dictionary`2":
+                            {
+                                if (entry.Value != null && entry.Value.ToString() != "")
+                                {
+                                    var jsSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                                    clsProperty.SetValue(this, (Dictionary<string, object>)jsSerializer.DeserializeObject(entry.Value.ToString()), null);
+                                }
+                                 
+                                break;
+                            }
+                        default:
+                            {
+                                clsProperty.SetValue(this, entry.Value, null);
+                                break;
+                            }
 
+                    }
                 }
             }
         }

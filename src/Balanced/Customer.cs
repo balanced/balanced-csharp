@@ -8,7 +8,7 @@ namespace Balanced
 {
     public class Customer : Resource
     {
-        public Dictionary<String, String> address { get; set; }
+        public Dictionary<String, object> address { get; set; }
         public String bank_accounts_uri { get; set; }
         public String business_name { get; set; }
         public String cards_uri { get; set; }

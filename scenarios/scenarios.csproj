@@ -55,6 +55,18 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="scenarios\api_key_create\" />
+    <Folder Include="scenarios\api_key_delete\" />
+    <Folder Include="scenarios\api_key_list\" />
+    <Folder Include="scenarios\api_key_show\" />
+    <Folder Include="scenarios\bank_account_associate_to_customer\" />
+    <Folder Include="scenarios\bank_account_create\" />
+    <Folder Include="scenarios\bank_account_credit\" />
+    <Folder Include="scenarios\bank_account_debit\" />
+    <Folder Include="scenarios\bank_account_delete\" />
+    <Folder Include="scenarios\card_create\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

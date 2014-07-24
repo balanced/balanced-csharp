@@ -1,1 +1,1 @@
-﻿ApiKey keys = ApiKey.Query()
+﻿ApiKey keys = ApiKey.Query();

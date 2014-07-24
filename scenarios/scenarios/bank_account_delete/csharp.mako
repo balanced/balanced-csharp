@@ -6,5 +6,5 @@ bankAccount.account_number = ;
 bankAccount.routing_number = ;
 bankAccount.account_type = ;
 bankAccount.name = ;
-bankAccount.save()
+bankAccount.save();
 % endif

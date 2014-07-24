@@ -65,6 +65,7 @@
     <Folder Include="scenarios\bank_account_credit\" />
     <Folder Include="scenarios\bank_account_debit\" />
     <Folder Include="scenarios\bank_account_delete\" />
+    <Folder Include="scenarios\bank_account_list\" />
     <Folder Include="scenarios\card_create\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

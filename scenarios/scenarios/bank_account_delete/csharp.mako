@@ -1,10 +1,6 @@
 % if mode == 'definition':
-new BankAccount()
+BankAccount.Unstore()
 % elif mode == 'request':
-BankAcount bankAccount = BankAccount.new();
-bankAccount.account_number = ;
-bankAccount.routing_number = ;
-bankAccount.account_type = ;
-bankAccount.name = ;
-bankAccount.save();
+BankAcount bankAccount = BankAccount.Fetch( "/bank_accounts/BA1iWjnIUhEkl5bORJGRGd9T" );
+bankAccount.Unstore();
 % endif

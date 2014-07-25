@@ -1,1 +1,1 @@
-﻿new BankAccount()
+﻿BankAccount.Unstore()

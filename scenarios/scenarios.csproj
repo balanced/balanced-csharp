@@ -71,6 +71,8 @@
     <Folder Include="scenarios\bank_account_verification_create\" />
     <Folder Include="scenarios\bank_account_verification_show\" />
     <Folder Include="scenarios\bank_account_verification_update\" />
+    <Folder Include="scenarios\callback_create\" />
+    <Folder Include="scenarios\callback_delete\" />
     <Folder Include="scenarios\card_create\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,5 @@
 % if mode == 'definition':
 Callback.Query()
 % elif mode == 'request':
-Callback callback = Callback.Query();
+Callback callbacks = Callback.Query();
 % endif

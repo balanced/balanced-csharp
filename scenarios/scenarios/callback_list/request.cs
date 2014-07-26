@@ -1,1 +1,1 @@
-﻿Callback callback = Callback.Query();
+﻿Callback callbacks = Callback.Query();

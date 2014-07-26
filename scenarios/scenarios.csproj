@@ -98,6 +98,9 @@
     <Folder Include="scenarios\credit_show\" />
     <Folder Include="scenarios\credit_update\" />
     <Folder Include="scenarios\customer_create\" />
+    <Folder Include="scenarios\debit_order\" />
+    <Folder Include="scenarios\debit_show\" />
+    <Folder Include="scenarios\debit_update\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -113,6 +113,10 @@
     <Folder Include="scenarios\refund_list\" />
     <Folder Include="scenarios\refund_show\" />
     <Folder Include="scenarios\refund_update\" />
+    <Folder Include="scenarios\reversal_create\" />
+    <Folder Include="scenarios\reversal_list\" />
+    <Folder Include="scenarios\reversal_show\" />
+    <Folder Include="scenarios\reversal_update\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,1 @@
+﻿Card card = Card.Fetch("{{ uri }}");

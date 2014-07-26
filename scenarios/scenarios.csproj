@@ -77,6 +77,21 @@
     <Folder Include="scenarios\callback_show\" />
     <Folder Include="scenarios\card_associate_to_customer\" />
     <Folder Include="scenarios\card_create\" />
+    <Folder Include="scenarios\card_create_creditable\" />
+    <Folder Include="scenarios\card_create_dispute\" />
+    <Folder Include="scenarios\card_credit\" />
+    <Folder Include="scenarios\card_debit\" />
+    <Folder Include="scenarios\card_debit_dispute\" />
+    <Folder Include="scenarios\card_delete\" />
+    <Folder Include="scenarios\card_hold_capture\" />
+    <Folder Include="scenarios\card_hold_create\" />
+    <Folder Include="scenarios\card_hold_list\" />
+    <Folder Include="scenarios\card_hold_show\" />
+    <Folder Include="scenarios\card_hold_update\" />
+    <Folder Include="scenarios\card_hold_void\" />
+    <Folder Include="scenarios\card_list\" />
+    <Folder Include="scenarios\card_show\" />
+    <Folder Include="scenarios\card_update\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

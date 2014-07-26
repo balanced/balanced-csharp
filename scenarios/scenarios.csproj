@@ -105,6 +105,10 @@
     <Folder Include="scenarios\dispute_show\" />
     <Folder Include="scenarios\event_list\" />
     <Folder Include="scenarios\event_show\" />
+    <Folder Include="scenarios\order_create\" />
+    <Folder Include="scenarios\order_list\" />
+    <Folder Include="scenarios\order_show\" />
+    <Folder Include="scenarios\order_update\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,1 +1,1 @@
-﻿Card.AssociateToCustomer()
+﻿new Card()

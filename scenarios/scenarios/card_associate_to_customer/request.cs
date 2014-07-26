@@ -1,4 +1,2 @@
-﻿Card card = Card.new();
-card.number = {{ payload.number }};
-card.cvv = {{ payload.cvv }};
-card.save();
+﻿Card card = Card.Fetch("{{ uri }}");
+card.AssociateToCustomer("{{payload.customer}}");

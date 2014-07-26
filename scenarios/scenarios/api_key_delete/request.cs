@@ -1,2 +1,2 @@
-﻿ApiKey key = ApiKey.Fetch( "{{ uri }}" );
+﻿ApiKey key = ApiKey.Fetch("{{ uri }}");
 key.Unstore();

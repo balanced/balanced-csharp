@@ -1,2 +1,2 @@
-﻿BankAcount bankAccount = BankAccount.Fetch( "{{ uri }}" );
-bankAccount.AssociateToCustomer( "{{payload.customer}}" );
+﻿BankAcount bankAccount = BankAccount.Fetch("{{ uri }}");
+bankAccount.AssociateToCustomer("{{payload.customer}}");

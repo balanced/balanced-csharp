@@ -1,2 +1,2 @@
-﻿BankAcount bankAccount = BankAccount.Fetch( "{{ uri }}" );
+﻿BankAcount bankAccount = BankAccount.Fetch("{{ uri }}");
 bankAccount.Unstore();

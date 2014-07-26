@@ -1,1 +1,1 @@
-﻿BankAccountVerification verification = BankAccountVerification.Fetch( "{{uri }}" );
+﻿BankAccountVerification verification = BankAccountVerification.Fetch("{{uri }}");

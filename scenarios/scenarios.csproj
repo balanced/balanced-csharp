@@ -75,6 +75,7 @@
     <Folder Include="scenarios\callback_delete\" />
     <Folder Include="scenarios\callback_list\" />
     <Folder Include="scenarios\callback_show\" />
+    <Folder Include="scenarios\card_associate_to_customer\" />
     <Folder Include="scenarios\card_create\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

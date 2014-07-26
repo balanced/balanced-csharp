@@ -92,6 +92,12 @@
     <Folder Include="scenarios\card_list\" />
     <Folder Include="scenarios\card_show\" />
     <Folder Include="scenarios\card_update\" />
+    <Folder Include="scenarios\credit_list\" />
+    <Folder Include="scenarios\credit_list_bank_account\" />
+    <Folder Include="scenarios\credit_order\" />
+    <Folder Include="scenarios\credit_show\" />
+    <Folder Include="scenarios\credit_update\" />
+    <Folder Include="scenarios\customer_create\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

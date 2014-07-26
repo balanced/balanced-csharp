@@ -1,1 +1,1 @@
-﻿BankAcount bankAccount = BankAccount.Query();
+﻿BankAccount bankAccount = BankAccount.Query();

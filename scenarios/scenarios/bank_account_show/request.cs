@@ -1,1 +1,1 @@
-﻿BankAcount bankAccount = BankAccount.Fetch("{{ uri }}");
+﻿BankAccount bankAccount = BankAccount.Fetch("{{ uri }}");

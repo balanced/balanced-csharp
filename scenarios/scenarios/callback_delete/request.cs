@@ -1,2 +1,2 @@
-﻿Callback callback = new Callback.Fetch("{{uri}}");
+﻿Callback callback = Callback.Fetch("{{uri}}");
 callback.Unstore;

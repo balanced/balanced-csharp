@@ -101,6 +101,8 @@
     <Folder Include="scenarios\debit_order\" />
     <Folder Include="scenarios\debit_show\" />
     <Folder Include="scenarios\debit_update\" />
+    <Folder Include="scenarios\dispute_list\" />
+    <Folder Include="scenarios\dispute_show\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

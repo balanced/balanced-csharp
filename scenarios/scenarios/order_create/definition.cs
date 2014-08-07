@@ -1,1 +1,1 @@
-﻿new Order
+﻿Customer.CreateOrder()

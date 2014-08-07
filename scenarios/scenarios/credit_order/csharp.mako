@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Order.Credit()
+Order.CreditTo()
 % elif mode == 'request':
 Order order = Order.Fetch("/orders/OR26ekFGTu5M22gr9fIKOMhH");
 BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1rgE1dqOFhqRaZydCenoBr/credits");

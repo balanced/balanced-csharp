@@ -1,5 +1,5 @@
 % if mode == 'definition':
 BankAccount.Query()
 % elif mode == 'request':
-BankAccount bankAccount = BankAccount.Query();
+List<BankAccount> bankAccounts = BankAccount.Query().All();
 % endif

@@ -17,7 +17,7 @@ namespace BalancedTests
 
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("description", "Test order #452");
-            Order order = merchant.createOrder(payload);
+            Order order = merchant.CreateOrder(payload);
 
             Assert.IsNotNull(order.href);
             Assert.AreEqual(order.merchant.href, merchant.href);
@@ -29,7 +29,7 @@ namespace BalancedTests
             Customer merchant = createPersonCustomer();
             BankAccount ba = createBankAccount();
             ba.AssociateToCustomer(merchant);
-            Order order = merchant.createOrder(null);
+            Order order = merchant.CreateOrder(null);
             Card card = createCard();
 
             Dictionary<string, object> debitPayload = new Dictionary<string, object>();
@@ -61,7 +61,7 @@ namespace BalancedTests
         public void TestOrderDebitCredit()
         {
             Customer merchant = createPersonCustomer();
-            Order order = merchant.createOrder(null);
+            Order order = merchant.CreateOrder(null);
             Card card = createCard();
             BankAccount ba = createBankAccount();
             ba.AssociateToCustomer(merchant);
@@ -97,7 +97,7 @@ namespace BalancedTests
         public void TestOrderDebitBankAccountCredit()
         {
             Customer merchant = createPersonCustomer();
-            Order order = merchant.createOrder(null);
+            Order order = merchant.CreateOrder(null);
             BankAccount ba = createBankAccount();
             ba.AssociateToCustomer(merchant);
             BankAccount buyerBA = createBankAccount();
@@ -135,7 +135,7 @@ namespace BalancedTests
         public void testOrderNoOverCredit()
         {
             Customer merchant = createPersonCustomer();
-            Order order = merchant.createOrder(null);
+            Order order = merchant.CreateOrder(null);
             BankAccount ba = createBankAccount();
             ba.AssociateToCustomer(merchant);
             BankAccount buyerBA = createBankAccount();

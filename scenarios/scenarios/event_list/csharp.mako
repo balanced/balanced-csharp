@@ -1,5 +1,5 @@
 % if mode == 'definition':
 Event.Query()
 % elif mode == 'request':
-Event events = Event.Query();
+List<Event> events = Event.Query().All();
 % endif

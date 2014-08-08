@@ -1,5 +1,5 @@
 % if mode == 'definition':
 Dispute.Query()
 % elif mode == 'request':
-Dispute disputes = Dispute.Query();
+List<Dispute> disputes = Dispute.Query().All();
 % endif

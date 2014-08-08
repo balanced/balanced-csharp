@@ -1,5 +1,5 @@
 % if mode == 'definition':
 Customer.Query()
 % elif mode == 'request':
-Customer customers = Customer.Query();
+List<Customer> customers = Customer.Query().All();
 % endif

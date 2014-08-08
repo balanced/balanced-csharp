@@ -1,1 +1,1 @@
-﻿Event events = Event.Query();
+﻿List<Event> events = Event.Query().All();

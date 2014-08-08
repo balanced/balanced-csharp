@@ -1,1 +1,1 @@
-﻿CardHold cardHolds = CardHold.Query();
+﻿List<CardHold> cardHolds = CardHold.Query().All();

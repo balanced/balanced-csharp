@@ -1,1 +1,1 @@
-﻿Credit credits = Credit.Query();
+﻿List<Credit> credits = Credit.Query().All();

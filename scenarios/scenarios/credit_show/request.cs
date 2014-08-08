@@ -1,1 +1,5 @@
-﻿Credit credit = Credit.Fetch("{{ uri }}");
+﻿using Balanced;
+
+Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+
+Credit credit = Credit.Fetch("{{ uri }}");

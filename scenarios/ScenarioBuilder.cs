@@ -44,6 +44,10 @@ namespace Scenarios
                         f.WriteLine("% if mode == 'definition':");
                         f.WriteLine(File.ReadAllText(scenarioDir + "/definition.cs"));
                         f.WriteLine("% elif mode == 'request':");
+                        f.WriteLine("using Balanced;");
+                        f.WriteLine("");
+                        f.WriteLine("Balanced.Balanced.configure(\"ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR\");");
+                        f.WriteLine("");
                         f.WriteLine(renderedRequest);
                         f.WriteLine("% endif");
                     }

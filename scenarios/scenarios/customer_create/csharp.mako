@@ -1,6 +1,10 @@
 % if mode == 'definition':
 new Customer()
 % elif mode == 'request':
+using Balanced;
+
+Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+
 Customer customer = Customer.new();
 Dictionary<string, string> address = new Dictionary<string, string>();
 address.Add("postal_code", "48120");

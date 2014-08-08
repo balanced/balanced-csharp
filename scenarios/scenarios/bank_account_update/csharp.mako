@@ -1,6 +1,10 @@
 % if mode == 'definition':
 BankAccount.Save()
 % elif mode == 'request':
+using Balanced;
+
+Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+
 BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1iWjnIUhEkl5bORJGRGd9T");
 Dictionary<string, string> meta = new Dictionary<string, string>();
 meta.Add("facebook.user_id", "0192837465");

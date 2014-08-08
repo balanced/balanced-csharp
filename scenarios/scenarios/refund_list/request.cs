@@ -1,1 +1,1 @@
-﻿Refund refunds = Refund.Query();
+﻿List<Refund> refunds = Refund.Query().All();

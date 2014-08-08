@@ -1,1 +1,2 @@
-﻿Customer customer = Customer.Unstore();
+﻿Customer customer = Customer.Fetch("{{uri}}");
+customer.Unstore();

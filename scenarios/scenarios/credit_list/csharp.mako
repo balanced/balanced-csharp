@@ -1,5 +1,5 @@
 % if mode == 'definition':
 Credit.Query()
 % elif mode == 'request':
-Credit credits = Credit.Query();
+List<Credit> credits = Credit.Query().All();
 % endif

@@ -1,1 +1,1 @@
-﻿Reversal reversals = Reversal.Query();
+﻿List<Reversal> reversals = Reversal.Query().All();

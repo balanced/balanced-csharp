@@ -1,0 +1,1 @@
+﻿List<Reversal> reversals = Reversal.Query().All();

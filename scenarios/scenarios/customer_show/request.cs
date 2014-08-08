@@ -1,1 +1,1 @@
-﻿Customer customer = Customer.Fetch("{{uri}}")
+﻿Customer customer = Customer.Fetch("{{uri}}");

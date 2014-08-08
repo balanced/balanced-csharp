@@ -1,1 +1,1 @@
-﻿Callback callback = Callback.Query();
+﻿List<Callback> callbacks = Callback.Query().All();

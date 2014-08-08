@@ -1,5 +1,5 @@
 % if mode == 'definition':
 CardHold.Query()
 % elif mode == 'request':
-CardHold cardHolds = CardHold.Query();
+List<CardHold> cardHolds = CardHold.Query().All();
 % endif

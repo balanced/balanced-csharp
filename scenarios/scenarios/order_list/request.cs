@@ -1,1 +1,1 @@
-﻿Order orders = Order.Query();
+﻿List<Order> orders = Order.Query().All();

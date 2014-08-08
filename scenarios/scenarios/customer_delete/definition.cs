@@ -1,1 +1,1 @@
-﻿new Customer()
+﻿Customer.Unstore()

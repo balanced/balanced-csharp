@@ -1,1 +1,1 @@
-﻿Card cards = Card.Query();
+﻿List<Card> cards = Card.Query().All();

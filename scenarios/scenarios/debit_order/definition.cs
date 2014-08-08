@@ -1,1 +1,1 @@
-﻿Order.Debit()
+﻿Order.DebitFrom()

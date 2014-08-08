@@ -1,1 +1,1 @@
-﻿Customer customers = Customer.Query();
+﻿List<Customer> customers = Customer.Query().All();

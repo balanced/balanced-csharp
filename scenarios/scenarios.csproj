@@ -30,7 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>Scenarios.ScenarioBuilder</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotLiquid">
@@ -49,70 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScenarioBuilder.cs" />
+    <None Include="Properties\AssemblyInfo.cs" />
+    <None Include="ScenarioBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scenarios\api_key_create\" />
-    <Folder Include="scenarios\api_key_delete\" />
-    <Folder Include="scenarios\api_key_list\" />
-    <Folder Include="scenarios\api_key_show\" />
-    <Folder Include="scenarios\bank_account_associate_to_customer\" />
-    <Folder Include="scenarios\bank_account_create\" />
-    <Folder Include="scenarios\bank_account_credit\" />
-    <Folder Include="scenarios\bank_account_debit\" />
-    <Folder Include="scenarios\bank_account_delete\" />
-    <Folder Include="scenarios\bank_account_list\" />
-    <Folder Include="scenarios\bank_account_show\" />
-    <Folder Include="scenarios\bank_account_update\" />
-    <Folder Include="scenarios\bank_account_verification_create\" />
-    <Folder Include="scenarios\bank_account_verification_show\" />
-    <Folder Include="scenarios\bank_account_verification_update\" />
-    <Folder Include="scenarios\callback_create\" />
-    <Folder Include="scenarios\callback_delete\" />
-    <Folder Include="scenarios\callback_list\" />
-    <Folder Include="scenarios\callback_show\" />
-    <Folder Include="scenarios\card_associate_to_customer\" />
-    <Folder Include="scenarios\card_create\" />
-    <Folder Include="scenarios\card_create_creditable\" />
-    <Folder Include="scenarios\card_create_dispute\" />
-    <Folder Include="scenarios\card_credit\" />
-    <Folder Include="scenarios\card_debit\" />
-    <Folder Include="scenarios\card_debit_dispute\" />
-    <Folder Include="scenarios\card_delete\" />
-    <Folder Include="scenarios\card_hold_capture\" />
-    <Folder Include="scenarios\card_hold_create\" />
-    <Folder Include="scenarios\card_hold_list\" />
-    <Folder Include="scenarios\card_hold_show\" />
-    <Folder Include="scenarios\card_hold_update\" />
-    <Folder Include="scenarios\card_hold_void\" />
-    <Folder Include="scenarios\card_list\" />
-    <Folder Include="scenarios\card_show\" />
-    <Folder Include="scenarios\card_update\" />
-    <Folder Include="scenarios\credit_list\" />
-    <Folder Include="scenarios\credit_list_bank_account\" />
-    <Folder Include="scenarios\credit_order\" />
-    <Folder Include="scenarios\credit_show\" />
-    <Folder Include="scenarios\credit_update\" />
-    <Folder Include="scenarios\customer_create\" />
-    <Folder Include="scenarios\debit_order\" />
-    <Folder Include="scenarios\debit_show\" />
-    <Folder Include="scenarios\debit_update\" />
-    <Folder Include="scenarios\dispute_list\" />
-    <Folder Include="scenarios\dispute_show\" />
-    <Folder Include="scenarios\event_list\" />
-    <Folder Include="scenarios\event_show\" />
-    <Folder Include="scenarios\order_create\" />
-    <Folder Include="scenarios\order_list\" />
-    <Folder Include="scenarios\order_show\" />
-    <Folder Include="scenarios\order_update\" />
-    <Folder Include="scenarios\refund_create\" />
-    <Folder Include="scenarios\refund_list\" />
-    <Folder Include="scenarios\refund_show\" />
-    <Folder Include="scenarios\refund_update\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,1 +1,1 @@
-﻿BankAccount bankAccount = BankAccount.Query();
+﻿List<BankAccount> bankAccounts = BankAccount.Query().All();

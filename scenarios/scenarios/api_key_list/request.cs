@@ -1,1 +1,1 @@
-﻿ApiKey keys = ApiKey.Query();
+﻿List<ApiKey> keys = ApiKey.Query().All();

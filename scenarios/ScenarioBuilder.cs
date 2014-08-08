@@ -35,12 +35,12 @@ namespace Scenarios
                     Console.WriteLine("Rendering " + scenarioName);
 
                     var scenarioRequestJSON = json[scenarioName]["request"];
+
                     Template template = Template.Parse(File.ReadAllText(scenarioDir + "/request.cs"));
                     var renderedRequest = template.Render(Hash.FromDictionary(scenarioRequestJSON));
                     
                     using (System.IO.StreamWriter f = new System.IO.StreamWriter(scenarioDir + "/csharp.mako"))
                     {                     
-
                         f.WriteLine("% if mode == 'definition':");
                         f.WriteLine(File.ReadAllText(scenarioDir + "/definition.cs"));
                         f.WriteLine("% elif mode == 'request':");                  

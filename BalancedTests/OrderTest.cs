@@ -14,6 +14,7 @@ namespace BalancedTests
         {
             Customer merchant = createPersonCustomer();
             Assert.AreEqual("underwritten", merchant.merchant_status);
+            // tests 
 
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add("description", "Test order #452");

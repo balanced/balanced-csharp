@@ -1,4 +1,7 @@
-﻿Reversal reversal = Reversal.Fetch("{{uri}}");
+﻿{{boilerplate_balanced}};
+{{name}};
+
+Reversal reversal = Reversal.Fetch("{{uri}}");
 Dictionary<string, string> meta = new Dictionary<string, string>();
 meta.Add("refund.reason", "{{ payload.meta.["refund.reason"] }}");
 meta.Add("user.notes", "{{ payload.meta.["user.notes"] }}");

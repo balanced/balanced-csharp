@@ -30,7 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>Scenarios.ScenarioBuilder</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotLiquid">

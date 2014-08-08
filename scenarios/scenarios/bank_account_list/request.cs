@@ -1,0 +1,1 @@
+﻿List<BankAccount> bankAccounts = BankAccount.Query().All();

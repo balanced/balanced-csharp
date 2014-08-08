@@ -1,0 +1,1 @@
+﻿List<Debit> debits = Debit.Query().All();

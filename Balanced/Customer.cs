@@ -83,7 +83,7 @@ namespace Balanced
             this.Reload<Customer>();
         }
 
-        public Order createOrder(Dictionary<string, Object> payload)
+        public Order CreateOrder(Dictionary<string, Object> payload)
         {
             return orders.Create(payload);
         }

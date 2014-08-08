@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScenarioBuilder.cs" />
+    <None Include="Properties\AssemblyInfo.cs" />
+    <None Include="ScenarioBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

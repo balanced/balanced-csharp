@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Customer.Query()
+Debit.Query()
 % elif mode == 'request':
-Customer customers = Customer.Query();
+Debit debits = Debit.Query();
 % endif

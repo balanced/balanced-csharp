@@ -1,0 +1,1 @@
+﻿Debit debits = Debit.Query();

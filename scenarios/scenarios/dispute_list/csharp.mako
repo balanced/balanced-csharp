@@ -1,5 +1,5 @@
 % if mode == 'definition':
-Customer.Query()
+Dispute.Query()
 % elif mode == 'request':
-Customer customers = Customer.Query();
+Dispute disputes = Dispute.Query();
 % endif

@@ -1,7 +1,7 @@
 ﻿using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("{{ api_key }}");
 
 Customer customer = Customer.Fetch("{{customer_href}}");
 Dictionary<string, object> orderPayload = new Dictionary<string, object>();

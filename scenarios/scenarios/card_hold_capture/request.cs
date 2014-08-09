@@ -1,7 +1,7 @@
 ﻿using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("{{ api_key }}");
 
 CardHold cardHold = CardHold.fetch("{{ card_hold_href }}");
 Dictionary<string, object> debitPayload = new Dictionary<string, object>();

@@ -1,5 +1,7 @@
-﻿{{boilerplate_balanced}};
-{{name}};
+﻿using Balanced;
+using System.Collections.Generic;
+
+Balanced.Balanced.configure("{{ api_key }}");
 
 Reversal reversal = Reversal.Fetch("{{uri}}");
 Dictionary<string, string> meta = new Dictionary<string, string>();

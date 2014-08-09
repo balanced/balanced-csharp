@@ -1,0 +1,1 @@
+Credit credit = Credit.Fetch(credit_href);

@@ -1,0 +1,1 @@
+Reversal reversal = credit.Reverse();

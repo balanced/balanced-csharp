@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Balanced;
 using System.Collections.Generic;
+using Balanced.Exceptions;
 
 namespace BalancedTests
 {
@@ -27,6 +28,33 @@ namespace BalancedTests
             Assert.IsNotNull(debit.href);
             Assert.AreEqual(10000, debit.amount);
             Assert.AreEqual("A simple debit", debit.description);
+        }
+
+        [TestMethod]
+        public void TestFailedDebitAPIException()
+        {
+            Customer customer = createPersonCustomer();
+            Card card = createPorcessorErrorCard();
+            card.AssociateToCustomer(customer);
+
+            Dictionary<string, object> meta = new Dictionary<string, object>();
+            meta.Add("invoice_id", "12141");
+
+            Dictionary<string, object> payload = new Dictionary<string, object>();
+            payload.Add("amount", 10000);
+            payload.Add("description", "A simple debit");
+            payload.Add("meta", meta);
+
+            try
+            {
+                Debit debit = card.Debit(payload);                         
+            }
+            catch(Balanced.Exceptions.APIException ex)
+            {
+                Assert.IsInstanceOfType(ex.additional, typeof(string));
+            }
+
+            
         }
 
         [TestMethod]

@@ -12,7 +12,7 @@ namespace Balanced.Exceptions
 {
     public class APIException : HTTPException
     {
-        public Dictionary<string, string> additional { get; set; }
+        public string additional { get; set; }
         public string category_code { get; set; }
         public string category_type { get; set; }
         public string description { get; set; }
@@ -27,13 +27,12 @@ namespace Balanced.Exceptions
             HttpWebResponse response,
             Dictionary<string, object>responsePayload)
         {
-            if (responsePayload.ContainsKey("additional") && responsePayload["additional"] != null)
-                additional = ((JObject)responsePayload["additional"]).ToObject<Dictionary<string, string>>();
+            additional = responsePayload.ContainsKey("additional") ? (string)responsePayload["additional"] : null;
             category_code = responsePayload.ContainsKey("category_code") ? (string)responsePayload["category_code"] : null;
             category_type = responsePayload.ContainsKey("category_type") ? (string)responsePayload["category_type"] : null;
             description = responsePayload.ContainsKey("description") ? (string)responsePayload["description"] : null;
             if (responsePayload.ContainsKey("extras") && responsePayload["extras"] != null)
-                additional = ((JObject)responsePayload["extras"]).ToObject<Dictionary<string, string>>();
+                extras = ((JObject)responsePayload["extras"]).ToObject<Dictionary<string, string>>();
             request_id = responsePayload.ContainsKey("request_id") ? (string)responsePayload["request_id"] : null;
             status = responsePayload.ContainsKey("status") ? (string)responsePayload["status"] : null;
             status_code = Convert.ToInt16(responsePayload["status_code"]);

@@ -41,7 +41,7 @@ namespace BalancedTests
             meta.Add("invoice_id", "12141");
 
             Dictionary<string, object> payload = new Dictionary<string, object>();
-            payload.Add("amount", 10000);
+            payload.Add("amount", 0);
             payload.Add("description", "A simple debit");
             payload.Add("meta", meta);
 
@@ -51,7 +51,8 @@ namespace BalancedTests
             }
             catch(Balanced.Exceptions.APIException ex)
             {
-                Assert.IsInstanceOfType(ex.additional, typeof(string));
+                Assert.IsTrue(string.IsNullOrEmpty(ex.additional));
+                Assert.IsInstanceOfType(ex.extras, typeof(Dictionary<String,String>));
             }
 
             

@@ -3,7 +3,7 @@ Card.Fetch()
 % elif mode == 'request':
 using Balanced;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-Card card = Card.Fetch("/cards/CC1O7vho1znJiHNRkKe11EYF");
+Card card = Card.Fetch("/cards/CC33DRVrekWpiHYjxSdVuqWc");
 % endif

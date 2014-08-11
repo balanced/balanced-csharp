@@ -4,9 +4,9 @@ Credit.Reverse()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-Credit credit = Credit.Fetch("/credits/CR3cR2U2FK754357DNSpOfVX");
+Credit credit = Credit.Fetch("/credits/CR5DQV6PdifnxDMmethpLIGN");
 Dictionary<string, string> payload = new Dictionary<string, string>();
 payload.Add("amount", 3000);
 payload.Add("description", "Reversal for Order #1111");

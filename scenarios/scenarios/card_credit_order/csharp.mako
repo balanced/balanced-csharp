@@ -1,14 +1,14 @@
-% if mode == 'definition':
-Order.DebitFrom()
+card% if mode == 'definition':
+Order.CreditTo()
 % elif mode == 'request':
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-Order order = Order.Fetch("/orders/OR26ekFGTu5M22gr9fIKOMhH");
-Card card = Card.Fetch("/cards/CC1VmEgD058TlNlPbcGiCac5");
+Order order = Order.Fetch("/orders/OR2UWXCNY2nKlqIQhQhWN3Jm");
+Card card = Card.Fetch("/cards/CC3IBNr3erYpVuuZDyWNFfet");
 Dictionary<string, object> debitPayload = new Dictionary<string, object>();
 debitPayload.Add("amount", 5000);
-Debit debit = order.DebitFrom(card, debitPayload);
+Debit debit = order.CreditTo(card, debitPayload);
 % endif

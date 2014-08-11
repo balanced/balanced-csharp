@@ -4,8 +4,8 @@ BankAccount.credits
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1iWjnIUhEkl5bORJGRGd9T");
+BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1D19WqGc3j78IAhFIkasQd");
 List<Credit> credits = bankAccount.credits;
 % endif

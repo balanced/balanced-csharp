@@ -3,8 +3,8 @@ BankAccount.AssociateToCustomer()
 % elif mode == 'request':
 using Balanced;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1rgE1dqOFhqRaZydCenoBr");
-bankAccount.AssociateToCustomer("/customers/CU1q8McSAi35Nb3sqPlMemWN");
+BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA2gul8YMjFWnFk0fFHXwX6g");
+bankAccount.AssociateToCustomer("/customers/CU2718cI8PkMdFyPjboZLZfn");
 % endif

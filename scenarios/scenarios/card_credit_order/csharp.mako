@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-Order order = Order.Fetch("/orders/OR3BXTqXewuSy1Cu3g6N2Sjj");
-BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA2gul8YMjFWnFk0fFHXwX6g/credits");
+Order order = Order.Fetch("/orders/OR2UWXCNY2nKlqIQhQhWN3Jm");
+Card card = Card.Fetch("/cards/CC3IBNr3erYpVuuZDyWNFfet");
 Dictionary<string, object> creditPayload = new Dictionary<string, object>();
 creditPayload.Add("amount", 5000);
-Credit credit = order.CreditTo(bankAccount, creditPayload);
+Credit credit = order.CreditTo(card, creditPayload);
 % endif

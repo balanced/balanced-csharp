@@ -4,9 +4,9 @@ BankAccount.Save()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1iWjnIUhEkl5bORJGRGd9T");
+BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1D19WqGc3j78IAhFIkasQd");
 Dictionary<string, string> meta = new Dictionary<string, string>();
 meta.Add("facebook.user_id", "0192837465");
 meta.Add("my-own-customer-id", "12345");

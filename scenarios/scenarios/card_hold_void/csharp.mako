@@ -3,8 +3,8 @@ CardHold.Unstore()
 % elif mode == 'request':
 using Balanced;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-CardHold cardHold = CardHold.fetch("/card_holds/HL1JMRZor2qJCFfmoFuC85PT");
+CardHold cardHold = CardHold.fetch("/card_holds/HL2U14YhpFdRACfJzlQNFI7m");
 cardHold.Unstore();
 % endif

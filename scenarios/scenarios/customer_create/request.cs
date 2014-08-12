@@ -1,4 +1,9 @@
-﻿Customer customer = Customer.new();
+﻿using Balanced;
+using System.Collections.Generic;
+
+Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+
+Customer customer = Customer.new();
 Dictionary<string, string> address = new Dictionary<string, string>();
 address.Add("postal_code", "{{ payload.address.["postal_code"] }}");
           

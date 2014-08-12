@@ -1,6 +1,11 @@
 % if mode == 'definition':
 BankAccount.Debit()
 % elif mode == 'request':
+using Balanced;
+using System.Collections.Generic;
+
+Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+
 BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA15JObs4S8e5Pwd3WsbzBa1");
 Dictionary<string, object> payload = new Dictionary<string, object>();
 payload.Add("amount", 5000);

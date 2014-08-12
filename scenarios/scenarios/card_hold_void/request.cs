@@ -1,6 +1,6 @@
 ﻿using Balanced;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("{{ api_key }}");
 
 CardHold cardHold = CardHold.fetch("{{ uri }}");
 cardHold.Unstore();

@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AssemblyInfo.cs" />
-    <None Include="ScenarioBuilder.cs" />
+    <Compile Include="ScenarioBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

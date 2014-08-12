@@ -23,7 +23,6 @@ namespace Scenarios
             var scenarioCache = myWebClient.DownloadString(SCENARIO_CACHE_URL);
             JavaScriptSerializer js = new JavaScriptSerializer();
             var json = js.Deserialize<dynamic>(scenarioCache);
-
             string[] scenarioDirs = Directory.GetDirectories(SCENARIOS_DIR);
 
             foreach (string scenarioDir in scenarioDirs)
@@ -35,7 +34,7 @@ namespace Scenarios
                     Console.WriteLine("Rendering " + scenarioName);
 
                     var scenarioRequestJSON = json[scenarioName]["request"];
-
+                    scenarioRequestJSON.Add("api_key", json["api_key"]);
                     Template template = Template.Parse(File.ReadAllText(scenarioDir + "/request.cs"));
                     var renderedRequest = template.Render(Hash.FromDictionary(scenarioRequestJSON));
                     

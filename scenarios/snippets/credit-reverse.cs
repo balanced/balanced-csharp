@@ -1,2 +1,2 @@
-Credit credit = Order.credits.First();
+Credit credit = Credit.Fetch(credit_href);
 Reversal reversal = credit.Reverse();

@@ -38,6 +38,24 @@ namespace BalancedTests
             return card;
         }
 
+        protected Card createPorcessorErrorCard()
+        {
+            Dictionary<string, string> address = new Dictionary<string, string>();
+            address.Add("line1", "123 Fake Street");
+            address.Add("city", "Jollywood");
+            address.Add("postal_code", "90210");
+
+            Card card = new Card();
+            card.name = "Homer Jay";
+            card.number = "4444444444444448";
+            card.cvv = "123";
+            card.expiration_month = 12;
+            card.expiration_year = 2016;
+            card.address = address;
+            card.Save();
+            return card;
+        }
+
         protected Card createCreditableCard()
         {
             Card card = new Card();

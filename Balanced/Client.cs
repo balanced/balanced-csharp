@@ -132,16 +132,13 @@ namespace Balanced
 
         public static void Error(HttpWebResponse response, string responsePayload)
         {
-            if ((int)response.StatusCode == 500)
-            {
-                throw new HTTPException(response, responsePayload);
-            }
-            else
-            {
+            try {
                 var responseObject = JObject.Parse(responsePayload.ToString());
                 var error = responseObject["errors"][0];
                 Dictionary<string, object> dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(error.ToString());
                 throw new APIException(response, dict);
+            } catch {
+                throw new HTTPException(response, responsePayload);
             }
         }
  

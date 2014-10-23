@@ -132,6 +132,7 @@ namespace Balanced
 
         public static void Error(HttpWebResponse response, string responsePayload)
         {
+            
             try {
                 var responseObject = JObject.Parse(responsePayload.ToString());
                 var error = responseObject["errors"][0];

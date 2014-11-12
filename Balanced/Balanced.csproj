@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
     <Compile Include="ApiKey.cs" />
     <Compile Include="Balanced.cs" />
     <Compile Include="BankAccount.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="ResourcePagination.cs" />
     <Compile Include="ResourceQuery.cs" />
     <Compile Include="Reversal.cs" />
+    <Compile Include="Settlement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

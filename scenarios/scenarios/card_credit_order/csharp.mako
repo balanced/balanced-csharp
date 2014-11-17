@@ -1,4 +1,4 @@
-card% if mode == 'definition':
+% if mode == 'definition':
 Order.CreditTo()
 % elif mode == 'request':
 using Balanced;

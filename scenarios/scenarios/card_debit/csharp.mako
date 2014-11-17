@@ -4,9 +4,9 @@ Card.Debit()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-Card card = Card.Fetch("/cards/CC1VmEgD058TlNlPbcGiCac5");
+Card card = Card.Fetch("/cards/CC33DRVrekWpiHYjxSdVuqWc");
 Dictionary<string, object> debitPayload = new Dictionary<string, object>();
 debitPayload.Add("amount", 5000);
 debitPayload.Add("description", "Some descriptive text for the debit in the dashboard");

@@ -4,9 +4,9 @@ CardHold.Capture()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-CardHold cardHold = CardHold.fetch("/card_holds/HL1CflQId0CQs3t6o53ZIqax");
+CardHold cardHold = CardHold.fetch("/card_holds/HL2F8jlnySjVKidwfXgBYZMY");
 Dictionary<string, object> debitPayload = new Dictionary<string, object>();
 debitPayload.Add("appears_on_statement_as", "ShowsUpOnStmt");
 debitPayload.Add("description", "Some descriptive text for the debit in the dashboard");

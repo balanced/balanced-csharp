@@ -3,8 +3,8 @@ ApiKey.Unstore()
 % elif mode == 'request':
 using Balanced;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-ApiKey key = ApiKey.Fetch("/api_keys/AK10MnleWQtvlw4ZJkps2Yu1");
+ApiKey key = ApiKey.Fetch("/api_keys/AKJnLWedoBhUHpdhoGEOPew");
 key.Unstore();
 % endif

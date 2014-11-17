@@ -4,9 +4,9 @@ BankAccount.Debit()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
 
-BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA15JObs4S8e5Pwd3WsbzBa1");
+BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA17zYxBNrmg9isvicjz9Ae4");
 Dictionary<string, object> payload = new Dictionary<string, object>();
 payload.Add("amount", 5000);
 payload.Add("appears_on_statement_as", "Statement text");

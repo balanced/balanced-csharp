@@ -161,14 +161,12 @@ namespace BalancedTests
 
             var innerResponse = new Mock<HttpWebResponse>();
             
-
-
             innerResponse.Setup(c => c.GetResponseStream()).Returns(responseStream);
-            innerResponse.Setup(c => c.StatusCode.Equals(500));
+            innerResponse.Setup(c => c.StatusCode).Returns(HttpStatusCode.InternalServerError);
 
             var response = new Mock<HttpWebResponse>();
             response.Setup(c => c.GetResponseStream()).Throws(
-                new WebException("an error occurred")
+                new WebException("an error occurred", innerException, WebExceptionStatus.UnknownError, innerResponse.Object)
             );
 
             var request = new Mock<HttpWebRequest>();

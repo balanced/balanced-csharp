@@ -16,7 +16,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
 
 namespace Balanced
-{ 
+{
     class AllPropertiesResolver : DefaultContractResolver
     {
         protected override List<MemberInfo> GetSerializableMembers(Type objectType)

@@ -148,9 +148,6 @@ namespace BalancedTests
         [ExpectedException(typeof(HTTPException))]
         public void TestEmptyHttpResponseCustomer()
         {
-
-
-            // arrange
             var expected = "response content";
             var expectedBytes = Encoding.UTF8.GetBytes(expected);
             var responseStream = new MemoryStream();

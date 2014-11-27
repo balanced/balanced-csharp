@@ -33,34 +33,8 @@ namespace Balanced
 
     public static class Client
     {
-        private static dynamic Op(string path, string method, string payload)
+        public static dynamic processResponse(HttpWebRequest request)
         {
-            string url = Balanced.API_URL + path;
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.UserAgent = "balanced-csharp/" + Balanced.VERSION;
-            request.Method = method;
-            request.ContentType = "application/json;revision=" + Balanced.API_REVISION;
-            request.Accept = "application/vnd.api+json;revision=" + Balanced.API_REVISION;
-            request.Timeout = 60000;
-            request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
-            if (Balanced.API_KEY != null)
-            {
-                string authorization = Balanced.API_KEY + ":";
-                byte[] binaryAuthorization = System.Text.Encoding.UTF8.GetBytes(authorization);
-                authorization = Convert.ToBase64String(binaryAuthorization);
-                authorization = "Basic " + authorization;
-                request.Headers.Add("AUTHORIZATION", authorization);
-            }
-
-            if (!String.IsNullOrWhiteSpace(payload))
-            {
-                byte[] postBytes = Encoding.UTF8.GetBytes(payload);
-                request.ContentLength = postBytes.Length;
-                Stream dataStream = request.GetRequestStream();
-                dataStream.Write(postBytes, 0, postBytes.Length);
-                dataStream.Close();
-            }
-
             string responsePayload = string.Empty;
             try
             {
@@ -89,8 +63,38 @@ namespace Balanced
                         throw new HTTPException(response, responsePayload);
                 }
             }
-
             return responsePayload;
+        }
+
+        private static dynamic Op(string path, string method, string payload)
+        {
+            string url = Balanced.API_URL + path;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.UserAgent = "balanced-csharp/" + Balanced.VERSION;
+            request.Method = method;
+            request.ContentType = "application/json;revision=" + Balanced.API_REVISION;
+            request.Accept = "application/vnd.api+json;revision=" + Balanced.API_REVISION;
+            request.Timeout = 60000;
+            request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+            if (Balanced.API_KEY != null)
+            {
+                string authorization = Balanced.API_KEY + ":";
+                byte[] binaryAuthorization = System.Text.Encoding.UTF8.GetBytes(authorization);
+                authorization = Convert.ToBase64String(binaryAuthorization);
+                authorization = "Basic " + authorization;
+                request.Headers.Add("AUTHORIZATION", authorization);
+            }
+
+            if (!String.IsNullOrWhiteSpace(payload))
+            {
+                byte[] postBytes = Encoding.UTF8.GetBytes(payload);
+                request.ContentLength = postBytes.Length;
+                Stream dataStream = request.GetRequestStream();
+                dataStream.Write(postBytes, 0, postBytes.Length);
+                dataStream.Close();
+            }
+            
+            return processResponse(request);
         }
 
         public static dynamic Get<T>(string path)
@@ -132,16 +136,14 @@ namespace Balanced
 
         public static void Error(HttpWebResponse response, string responsePayload)
         {
-            if ((int)response.StatusCode == 500)
-            {
-                throw new HTTPException(response, responsePayload);
-            }
-            else
-            {
+            
+            try {
                 var responseObject = JObject.Parse(responsePayload.ToString());
                 var error = responseObject["errors"][0];
                 Dictionary<string, object> dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(error.ToString());
                 throw new APIException(response, dict);
+            } catch (Newtonsoft.Json.JsonReaderException) {
+                throw new HTTPException(response, responsePayload);
             }
         }
  

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Balanced
 {
-    public class Account : FundingInstrument
+    public class Account : Resource
     {
         [JsonIgnore]
         public static string resource_href
@@ -37,9 +37,6 @@ namespace Balanced
         [ResourceField(field = "accounts.settlements", link = true, serialize = false)]
         public Settlement.Collection settlements { get; set; }
 
-        [ResourceField(field = "accounts.debits", link = true, serialize = false)]
-        public Debit.Collection debits { get; set; }
-
         [ResourceField(field = "accounts.credits", link = true, serialize = false)]
         public Credit.Collection credits { get; set; }
 
@@ -62,6 +59,7 @@ namespace Balanced
         {
             this.Reload<Account>();
         }
+
 
         public Credit Credit(Dictionary<string, object> payload)
         {

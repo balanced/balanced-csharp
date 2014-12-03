@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Balanced
 {
-    public class Account : Resource
+    public class Account : FundingInstrument
     {
         [JsonIgnore]
         public static string resource_href
@@ -40,6 +40,8 @@ namespace Balanced
         [ResourceField(field = "accounts.credits", link = true, serialize = false)]
         public Credit.Collection credits { get; set; }
 
+        [ResourceField(field = "accounts.debits", link = true, serialize = false)]
+        public Debit.Collection debits { get; set; }
 
         public Account() { }
 
@@ -61,9 +63,18 @@ namespace Balanced
         }
 
 
-        public Credit Credit(Dictionary<string, object> payload)
+        public override Credit Credit(Dictionary<string, object> payload)
         {
             return credits.Create(payload);
+        }
+
+        public override Debit Debit(Dictionary<string, object> payload)
+        {
+            if (this.can_debit == false)
+            {
+                throw new Exceptions.FundingInstrumentNotDebitable();
+            }
+            return debits.Create(payload);
         }
 
         public Settlement Settle(Dictionary<string, object> payload)

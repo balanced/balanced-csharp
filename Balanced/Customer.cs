@@ -63,6 +63,17 @@ namespace Balanced
         [ResourceField(field = "customers.reversals", link = true, serialize = false)]
         public Reversal.Collection reversals { get; set; }
 
+        [ResourceField(field = "customers.accounts", link = true, serialize = false)]
+        public Account.Collection accounts { get; set; }
+
+        public Account Payable_Account()
+        {
+            Account payable_acount = this.accounts.Query().Filter("account_type", "=", "payable").First();
+            if (payable_acount == null)
+                throw new SystemException("A payable account was not found");
+            return payable_acount;
+        }
+
 
         public Customer() { }
 

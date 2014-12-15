@@ -66,9 +66,9 @@ namespace Balanced
         [ResourceField(field = "customers.accounts", link = true, serialize = false)]
         public Account.Collection accounts { get; set; }
 
-        public Account Payable_Account()
+        public Account PayableAccount()
         {
-            Account payable_acount = this.accounts.Query().Filter("account_type", "contains", "payable").First();
+            Account payable_acount = this.accounts.Query().Filter("type", "contains", "payable").First();
             if (payable_acount == null)
                 throw new SystemException("A payable account was not found");
             return payable_acount;

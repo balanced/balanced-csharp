@@ -21,7 +21,7 @@ namespace Balanced
 
         // attributes
         [ResourceField(serialize = false)]
-        public string account_type { get; set; }
+        public string type { get; set; }
         [ResourceField(serialize = false)]
         public bool can_credit { get; set; }
         [ResourceField(serialize = false)]
@@ -84,8 +84,16 @@ namespace Balanced
 
         public class Collection : ResourceCollection<Account>
         {
-            public Collection() : base(resource_href) { }
-            public Collection(string href) : base(href) { }
+            [JsonIgnore]
+            public static string href { get; set; }
+
+            public Collection() : base(resource_href) { href = resource_href; }
+            public Collection(string pHref) : base(href) { href = pHref; }
+
+            public ResourceQuery<Account> Query()
+            {
+                return new ResourceQuery<Account>(href);
+            }
         }
 
         public static ResourceQuery<Account> Query()

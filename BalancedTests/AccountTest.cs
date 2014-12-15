@@ -10,10 +10,10 @@ namespace BalancedTests
     public class AccountTest : BaseTest
     {
         [TestMethod]
-        public void TestAccountTransfer()
+        public void TestAccountCredit()
         {
             Customer merchant = createPersonCustomer();
-            Account payable_account = merchant.Payable_Account();
+            Account payableAccount = merchant.PayableAccount();
             BankAccount ba = createBankAccount();
             ba.AssociateToCustomer(merchant);
             Order order = merchant.CreateOrder(null);
@@ -29,12 +29,12 @@ namespace BalancedTests
             Dictionary<string, object> creditPayload = new Dictionary<string, object>();
             creditPayload.Add("description", "Payout for Order #234123");
             creditPayload.Add("amount", 5000);
-            creditPayload.Add("order", order);
+            creditPayload.Add("order", order.href);
 
-            Credit credit = payable_account.Credit(creditPayload);
-            payable_account.Reload();
+            Credit credit = payableAccount.Credit(creditPayload);
+            payableAccount.Reload();
 
-            Assert.AreEqual(payable_account.balance, 5000);
+            Assert.AreEqual(payableAccount.balance, 5000);
         }
     }
 }

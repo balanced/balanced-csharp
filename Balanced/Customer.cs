@@ -68,10 +68,10 @@ namespace Balanced
 
         public Account PayableAccount()
         {
-            Account payable_acount = this.accounts.Query().Filter("type", "contains", "payable").First();
-            if (payable_acount == null)
+            Account payableAccount = this.accounts.Query().Filter("type", "contains", "payable").First();
+            if (payableAccount == null)
                 throw new SystemException("A payable account was not found");
-            return payable_acount;
+            return payableAccount;
         }
 
 

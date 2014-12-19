@@ -67,6 +67,8 @@
     <Compile Include="DebitTest.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="DisputeTest.cs" />
+    <Compile Include="AccountTest.cs" />
+    <Compile Include="SettlementTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Balanced\Balanced.csproj">

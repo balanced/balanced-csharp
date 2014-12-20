@@ -23,10 +23,6 @@ namespace Balanced
         [ResourceField(serialize = false)]
         public string type { get; set; }
         [ResourceField(serialize = false)]
-        public bool can_credit { get; set; }
-        [ResourceField(serialize = false)]
-        public bool can_debit { get; set; }
-        [ResourceField(serialize = false)]
         public string currency { get; set; }
         [ResourceField(serialize = false)]
         public int balance { get; set; }

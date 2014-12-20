@@ -10,7 +10,7 @@ namespace Balanced
 {
     public static class Balanced
     {
-        public static string VERSION { get { return "1.1";  } }
+        public static string VERSION { get { return "1.2.0.0";  } }
         public static string API_REVISION { get { return "1.1"; } }
         public static string API_URL { get { return "https://api.balancedpayments.com"; } }
         internal static string API_KEY { get; set; }

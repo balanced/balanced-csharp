@@ -2,4 +2,4 @@
 
 Balanced.Balanced.configure("{{ api_key }}");
 
-Settlement settlements = Settlement.Fetch("{{ uri }}");
+Settlement settlement = Settlement.Fetch("{{ uri }}");

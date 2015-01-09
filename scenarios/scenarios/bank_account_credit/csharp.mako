@@ -4,9 +4,9 @@ BankAccount.Credit()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA2gul8YMjFWnFk0fFHXwX6g");
+BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA6g0aWJb8TNd7sXXs17t0Q0");
 Dictionary<string, object> creditPayload = new Dictionary<string, object>();
 creditPayload.Add("amount", 5000 );
 Credit credit = bankAccount.Credit(creditPayload);

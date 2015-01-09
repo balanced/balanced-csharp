@@ -4,9 +4,9 @@ CardHold.Save()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-CardHold cardHold = CardHold.fetch("/card_holds/HL2F8jlnySjVKidwfXgBYZMY");
+CardHold cardHold = CardHold.fetch("/card_holds/HL44qbPoom3uVlTlEGBZV7z2");
 Dictionary<string, string> meta = new Dictionary<string, string>();
 meta.Add("holding.for.user_id", "user1");
 meta.Add("meaningful.key", "some.value");

@@ -4,9 +4,9 @@ Debit.Refund()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Debit debit = Debit.Fetch("/debits/WD4heQm0HfB6IpymdvsGM8dv");
+Debit debit = Debit.Fetch("/debits/WD4wXVn2sS8lXuKATwXOf7Uc");
 Dictionary<string, string> payload = new Dictionary<string, string>();
 payload.Add("amount", 3000);
 payload.Add("description", "Refund for Order #1111");

@@ -1,9 +1,9 @@
 % if mode == 'definition':
-BankAccount.Fetch()
+Settlement.Fetch()
 % elif mode == 'request':
 using Balanced;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1iWjnIUhEkl5bORJGRGd9T");
+Settlement settlements = Settlement.Fetch("/settlements/ST5xMBEiT3t2Stt2ia4Svl2d");
 % endif

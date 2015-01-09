@@ -1,11 +1,11 @@
 % if mode == 'definition':
-BankAccount.credits
+Customer.accounts
 % elif mode == 'request':
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1iWjnIUhEkl5bORJGRGd9T");
-List<Credit> credits = bankAccount.credits;
+Customer customer = Customer.Fetch("/customers/CU4CZc7Xjn8gGJXl1LyzZk7S");
+List<Account> accounts = customer.accounts;
 % endif

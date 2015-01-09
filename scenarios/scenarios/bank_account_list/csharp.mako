@@ -4,7 +4,7 @@ BankAccount.Query()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
 List<BankAccount> bankAccounts = BankAccount.Query().All();
 % endif

@@ -4,9 +4,9 @@ Debit.Save()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Debit debit = Debit.Fetch("/debits/WD3nVmuDYvCWCox0YECGc6b3");
+Debit debit = Debit.Fetch("/debits/WD4LT3ghEgoGK9z4wUQCsKUU");
 Dictionary<string, string> meta = new Dictionary<string, string>();
 meta.Add("anykey", "valuegoeshere");
 debit.meta = meta;

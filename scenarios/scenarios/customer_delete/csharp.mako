@@ -3,8 +3,8 @@ Customer.Unstore()
 % elif mode == 'request':
 using Balanced;
 
-Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Customer customer = Customer.Fetch("/customers/CU40AyvBB6ny9u3oelCwyc3C");
+Customer customer = Customer.Fetch("/customers/CU3MjqyarSxE66kggE8MMtGB");
 customer.Unstore();
 % endif

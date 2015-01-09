@@ -4,9 +4,9 @@ Refund.Save()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Refund refund = Refund.Fetch("/refunds/RF4n5AfJ8MRB55oTzVWTRoVa");
+Refund refund = Refund.Fetch("/refunds/RF4zwAHHq8ifpN3M1RLEwSJD");
 Dictionary<string, string> meta = new Dictionary<string, string>();
 meta.Add("refund.reason", "user not happy with product");
 meta.Add("user.notes", "very polite on the phone");

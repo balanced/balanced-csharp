@@ -4,9 +4,9 @@ Credit.Save()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Credit credit = Credit.Fetch("/credits/CR3yvp1R6162kK7MozoHmSkg");
+Credit credit = Credit.Fetch("/credits/CR5pb9ux8RYVNTwcJ3jdVF84");
 Dictionary<string, string> meta = new Dictionary<string, string>();
 meta.Add("facebook.id", "1234567890");
 meta.Add("anykey", "valuegoeshere");

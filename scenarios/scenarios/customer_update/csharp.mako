@@ -4,9 +4,9 @@ Customer.Save()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-25ZY8HQwZPuQtDecrxb671LilUya5t5G0");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Customer customer = Customer.Fetch("/customers/CU3SSJgvA5Z69kt05MusbPeE");
+Customer customer = Customer.Fetch("/customers/CU3BDNwUxRmQTDTQQatYGqr3");
 Dictionary<string, string> meta = new Dictionary<string, string>();
 meta.Add("shipping-preference", "ground");
 customer.meta = meta;

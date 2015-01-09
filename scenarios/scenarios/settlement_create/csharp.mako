@@ -1,13 +1,15 @@
 % if mode == 'definition':
-BankAccount.Credit()
+Account.Settle()
 % elif mode == 'request':
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-BankAccount bankAccount = BankAccount.Fetch("/bank_accounts/BA1rgE1dqOFhqRaZydCenoBr");
-Dictionary<string, object> creditPayload = new Dictionary<string, object>();
-creditPayload.Add("amount", 5000 );
-Credit credit = bankAccount.Credit(creditPayload);
+Account account = Account.Fetch("/accounts/AT2E6Ju62P9AnTJwe0fL5kOI");
+Dictionary<string, object> settlementPayload = new Dictionary<string, object>();
+settlementPayload.Add("funding_instrument", "/bank_accounts/BA3uzbngfVXy1SGg25Et7iKY" );
+settlementPayload.Add("appears_on_statement_as", "ThingsCo" );
+settlementPayload.Add("description", "Payout A" );
+Settlement settlements = account.Settle(settlementPayload);
 % endif

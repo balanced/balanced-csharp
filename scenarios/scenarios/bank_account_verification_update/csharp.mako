@@ -3,8 +3,8 @@ BankAccountVerification.Confirm()
 % elif mode == 'request':
 using Balanced;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-BankAccountVerification verification = BankAccountVerification.Fetch("/verifications/BZ1cqB0VfXFJ1wJbDsqsP6MB");
+BankAccountVerification verification = BankAccountVerification.Fetch("/verifications/BZ5XxtvPAMXrKcmyaN1DFqfK");
 verification.Confirm(1, 1);
 % endif

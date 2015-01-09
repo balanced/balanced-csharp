@@ -3,8 +3,8 @@ Reversal.Fetch()
 % elif mode == 'request':
 using Balanced;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
 
-Reversal reversal = Reversal.Fetch("/reversals/RV3ebCCE94OFi4Wlj8m72rr3");
+Reversal reversal = Reversal.Fetch("/reversals/RV5xRK6ZoaXMhboMamfdfm85");
 % endif

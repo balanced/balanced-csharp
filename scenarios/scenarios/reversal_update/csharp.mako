@@ -4,9 +4,9 @@ Reversal.Save()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Reversal reversal = Reversal.Fetch("/reversals/RV3ebCCE94OFi4Wlj8m72rr3");
+Reversal reversal = Reversal.Fetch("/reversals/RV5xRK6ZoaXMhboMamfdfm85");
 Dictionary<string, string> meta = new Dictionary<string, string>();
 meta.Add("refund.reason", "user not happy with product");
 meta.Add("user.notes", "very polite on the phone");

@@ -4,7 +4,7 @@ Event.Fetch()
 using Balanced;
 using System.Collections.Generic;
 
-Balanced.Balanced.configure("ak-test-DXIgzoqwN4LsoCabloqy87y42qwm1lXR");
+Balanced.Balanced.configure("ak-test-1xLFE6RLC1W3P4ePiQDI4UVpRwtKcdfqL");
 
-Event event = Event.Fetch("/events/EV1e70bdf0fe5211e39d2e061e5f402045");
+Event event = Event.Fetch("/events/EV96e2da0887f411e4a02d020fe4ae3568");
 % endif

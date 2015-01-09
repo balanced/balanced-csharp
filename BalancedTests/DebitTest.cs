@@ -3,6 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Balanced;
 using System.Collections.Generic;
 using Balanced.Exceptions;
+using System.Text;
+using System.IO;
+using Moq;
+using System.Net;
 
 namespace BalancedTests
 {
@@ -47,15 +51,15 @@ namespace BalancedTests
 
             try
             {
-                Debit debit = card.Debit(payload);                         
+                Debit debit = card.Debit(payload);
             }
-            catch(Balanced.Exceptions.APIException ex)
+            catch (Balanced.Exceptions.APIException ex)
             {
                 Assert.IsTrue(string.IsNullOrEmpty(ex.additional));
-                Assert.IsInstanceOfType(ex.extras, typeof(Dictionary<String,String>));
+                Assert.IsInstanceOfType(ex.extras, typeof(Dictionary<String, String>));
             }
 
-            
+
         }
 
         [TestMethod]
@@ -138,6 +142,47 @@ namespace BalancedTests
 
             Assert.AreEqual("succeeded", debit.status);
             Assert.AreEqual(100000, debit.amount);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(HTTPException))]
+        public void TestEmptyHttpResponseCustomer()
+        {
+            var expected = "response content";
+            var expectedBytes = Encoding.UTF8.GetBytes(expected);
+            var responseStream = new MemoryStream();
+            responseStream.Write(expectedBytes, 0, expectedBytes.Length);
+            responseStream.Seek(0, SeekOrigin.Begin);
+
+            Exception innerException = new Exception("Time out");
+
+            var innerResponse = new Mock<HttpWebResponse>();
+            
+            innerResponse.Setup(c => c.GetResponseStream()).Returns(responseStream);
+            innerResponse.Setup(c => c.StatusCode).Returns(HttpStatusCode.InternalServerError);
+
+            var response = new Mock<HttpWebResponse>();
+            response.Setup(c => c.GetResponseStream()).Throws(
+                new WebException("an error occurred", innerException, WebExceptionStatus.UnknownError, innerResponse.Object)
+            );
+
+            var request = new Mock<HttpWebRequest>();
+            request.Setup(c => c.GetResponse()).Returns(response.Object);
+
+            var factory = new Mock<IHttpWebRequestFactory>();
+            factory.Setup(c => c.Create(It.IsAny<string>()))
+                .Returns(request.Object);
+
+            // act
+            var actualRequest = factory.Object.Create("http://www.google.com");
+            actualRequest.Method = WebRequestMethods.Http.Get;
+
+            Client.processResponse(actualRequest);
+        }
+
+        public interface IHttpWebRequestFactory
+        {
+            HttpWebRequest Create(string uri);
         }
 
         [TestMethod]

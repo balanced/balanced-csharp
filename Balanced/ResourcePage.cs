@@ -131,8 +131,9 @@ namespace Balanced
                 List<JObject> objs = responseObject[key].ToObject<List<JObject>>();
                 foreach (JObject o in objs)
                 {
-                    var cust = o.ToObject<T>();
-                    items.Add(cust);
+                    var res = o.ToObject<T>();
+                    var hydratedRes = Client.HydrateLinks(key, hyperlinks, res, res);
+                    items.Add(hydratedRes);
                 }
             }
 

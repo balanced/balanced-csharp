@@ -15,12 +15,46 @@ namespace Balanced
             get { return "/settlements"; }
         }
 
-        [ResourceField(field = "settlements.events", link = true, serialize = false)]
-        public Event.Collection events { get; set; }
+        // fields
+        [ResourceField]
+        public FundingInstrument funding_instrument { get; set; }
+        [ResourceField]
+        public int amount { get; set; }
+        [ResourceField]
+        public string description { get; set; }
+        [ResourceField]
+        public string appears_on_statement_as { get; set; }
+
+        [ResourceField(field = "settlements.destination", link = true)]
+        public FundingInstrument destination { get; set; }
+
+        [ResourceField(field = "settlements.source", link = true)]
+        public FundingInstrument source { get; set; }
+
+        // attributes
+        [ResourceField(serialize = false)]
+        public string currency { get; set; }
+        [ResourceField(serialize = false)]
+        public string failure_reason { get; set; }
+        [ResourceField(serialize = false)]
+        public string failure_reason_code { get; set; }
+        [ResourceField(serialize = false)]
+        public string status { get; set; }
+        [ResourceField(serialize = false)]
+        public string transaction_number { get; set; }
+
+        public Settlement() { }
+
+        public Settlement(Dictionary<string, object> payload) { }
 
         public static Settlement Fetch(string href)
         {
             return Resource.Fetch<Settlement>(href);
+        }
+
+        public void Save()
+        {
+            this.Save<Settlement>();
         }
 
         public class Collection : ResourceCollection<Settlement>

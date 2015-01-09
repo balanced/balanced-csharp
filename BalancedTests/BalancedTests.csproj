@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -64,6 +67,8 @@
     <Compile Include="DebitTest.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="DisputeTest.cs" />
+    <Compile Include="AccountTest.cs" />
+    <Compile Include="SettlementTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Balanced\Balanced.csproj">

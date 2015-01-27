@@ -71,15 +71,22 @@ namespace Balanced
 
         public T Create()
         {
-            Dictionary<string, object> payload = new Dictionary<string, object>();
-            return Create(payload);
+            return Create(new Dictionary<string, object>());
         }
 
         public T Create(Dictionary<string, object> payload)
         {
-            dynamic resource;
-            resource = Client.Post<T>(GetURI(), Resource.Serialize(payload));
-            return resource;
+            return CreateAsync(payload).GetAwaiter().GetResult();
+        }
+
+        public Task<T> CreateAsync()
+        {
+            return CreateAsync(new Dictionary<string, object>());
+        }
+
+        public async Task<T> CreateAsync(Dictionary<string, object> payload)
+        {
+            return await Client.PostAsync<T>(GetURI(), Resource.Serialize(payload));
         }
 
         public class ResourceIterator : IEnumerator

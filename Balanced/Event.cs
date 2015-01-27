@@ -32,6 +32,11 @@ namespace Balanced
             return Resource.Fetch<Event>(href);
         }
 
+        public static Task<Event> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Event>(href);
+        }
+
         public class Collection : ResourceCollection<Event>
         {
             public Collection() : base(resource_href) { }

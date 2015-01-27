@@ -51,14 +51,29 @@ namespace Balanced
             return Resource.Fetch<Reversal>(href);
         }
 
+        public static Task<Reversal> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Reversal>(href);
+        }
+
         public void Save()
         {
             this.Save<Reversal>();
         }
 
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Reversal>();
+        }
+
         public void Reload()
         {
             this.Reload<Reversal>();
+        }
+
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<Reversal>();
         }
 
         public class Collection : ResourceCollection<Reversal>

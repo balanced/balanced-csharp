@@ -50,14 +50,29 @@ namespace Balanced
             return Resource.Fetch<Refund>(href);
         }
 
-        public void save()
+        public static Task<Refund> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Refund>(href);
+        }
+
+        public void Save()
         {
             this.Save<Refund>();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Refund>();
         }
 
         public void Reload()
         {
             this.Reload<Refund>();
+        }
+
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<Refund>();
         }
 
         public class Collection : ResourceCollection<Refund>

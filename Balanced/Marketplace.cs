@@ -86,14 +86,29 @@ namespace Balanced
             return Resource.Fetch<Marketplace>(href);
         }
 
+        public static Task<Marketplace> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Marketplace>(href);
+        }
+
         public void Save()
         {
             this.Save<Marketplace>();
         }
 
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Marketplace>();
+        }
+
         public void Reload()
         {
             this.Reload<Marketplace>();
+        }
+
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<Marketplace>();
         }
 
         public static ResourceQuery<Marketplace> Query()

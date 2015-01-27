@@ -1,9 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using System.Threading.Tasks;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Balanced
 {
@@ -59,9 +57,19 @@ namespace Balanced
             return Resource.Fetch<CardHold>(href);
         }
 
+        public static Task<CardHold> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<CardHold>(href);
+        }
+
         public void Save()
         {
             this.Save<CardHold>();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<CardHold>();
         }
 
         public void Reload()
@@ -69,14 +77,29 @@ namespace Balanced
             this.Reload<CardHold>();
         }
 
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<CardHold>();
+        }
+
         public Debit Capture(Dictionary<string, object> payload)
         {
-            return debits.Create(payload);
+            return CaptureAsync(payload).GetAwaiter().GetResult();
         }
 
         public Debit Capture()
         {
-            return this.Capture(null);
+            return CaptureAsync().GetAwaiter().GetResult();
+        }
+
+        public Task<Debit> CaptureAsync(Dictionary<string, object> payload)
+        {
+            return debits.CreateAsync(payload);
+        }
+
+        public Task<Debit> CaptureAsync()
+        {
+            return this.CaptureAsync(null);
         }
 
         public class Collection : ResourceCollection<CardHold>

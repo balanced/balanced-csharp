@@ -71,14 +71,29 @@ namespace Balanced
             return Resource.Fetch<Card>(href);
         }
 
+        public static Task<Card> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Card>(href);
+        }
+
         public void Save()
         {
             this.Save<Card>();
         }
 
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Card>();
+        }
+
         public void Reload()
         {
             this.Reload<Card>();
+        }
+
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<Card>();
         }
 
         public void AssociateToCustomer(Customer customer)
@@ -88,10 +103,20 @@ namespace Balanced
 
         public void AssociateToCustomer(string href)
         {
+            AssociateToCustomerAsync(href).GetAwaiter().GetResult();
+        }
+
+        public Task AssociateToCustomerAsync(Customer customer)
+        {
+            return this.AssociateToCustomerAsync(customer.href);
+        }
+
+        public async Task AssociateToCustomerAsync(string href)
+        {
             if (href != null)
             {
                 links.Add("customer", href);
-                this.Save();
+                await this.SaveAsync();
             }
         }
 
@@ -100,17 +125,22 @@ namespace Balanced
             return card_holds.Create(payload);
         }
 
-        public override Debit Debit(Dictionary<string, object> payload)
+        public Task<CardHold> HoldAsync(Dictionary<string, object> payload)
         {
-            return debits.Create(payload);
+            return card_holds.CreateAsync(payload);
         }
 
-        public override Credit Credit(Dictionary<string, object> payload)
+        public override Task<Debit> DebitAsync(Dictionary<string, object> payload)
+        {
+            return debits.CreateAsync(payload);
+        }
+
+        public override Task<Credit> CreditAsync(Dictionary<string, object> payload)
         {
             if (credits == null) {
                 throw new Exceptions.FundingInstrumentNotCreditable();
             }
-            return credits.Create(payload);
+            return credits.CreateAsync(payload);
         }
 
         public class Collection : ResourceCollection<Card>

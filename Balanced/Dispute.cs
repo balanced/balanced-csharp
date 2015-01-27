@@ -41,6 +41,11 @@ namespace Balanced
             return Resource.Fetch<Dispute>(href);
         }
 
+        public static Task<Dispute> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Dispute>(href);
+        }
+
         public class Collection : ResourceCollection<Dispute>
         {
             public Collection() : base(resource_href) { }

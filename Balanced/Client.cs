@@ -31,20 +31,18 @@ namespace Balanced
 
     public static class Client
     {
-        public static dynamic processResponse(HttpWebRequest request)
+        public static string processResponse(HttpWebRequest request)
         {
             return processResponseAsync(request).GetAwaiter().GetResult();
         }
 
-        public static async Task<dynamic> processResponseAsync(HttpWebRequest request)
+        public static async Task<string> processResponseAsync(HttpWebRequest request)
         {
             HttpWebResponse exceptionResponse = null;
 
             try
             {
-                var task = request.GetResponseAsync();
-                var response = await task;
-                using (response)
+                using (HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync())
                 {
                     using (var stream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(1252)))
                     {
@@ -60,7 +58,7 @@ namespace Balanced
             return await HandleExceptionResponse(exceptionResponse);
         }
 
-        private static async Task<dynamic> HandleExceptionResponse(HttpWebResponse exceptionResponse)
+        private static async Task<string> HandleExceptionResponse(HttpWebResponse exceptionResponse)
         {
             string responsePayload = string.Empty;
             using (var stream = new StreamReader(exceptionResponse.GetResponseStream()))
@@ -83,12 +81,12 @@ namespace Balanced
             return responsePayload;
         }
 
-        private static dynamic Op(string path, string method, string payload)
+        private static string Op(string path, string method, string payload)
         {
             return OpAsync(path, method, payload).GetAwaiter().GetResult();
         }
 
-        private static async Task<dynamic> OpAsync(string path, string method, string payload)
+        private static async Task<string> OpAsync(string path, string method, string payload)
         {
             string url = Balanced.API_URL + path;
             var request = (HttpWebRequest)WebRequest.Create(url);
@@ -119,22 +117,22 @@ namespace Balanced
             return await processResponseAsync(request);
         }
 
-        public static dynamic Get<T>(string path)
+        public static T Get<T>(string path)
         {
-            return Get<T>(path, true);
+            return (T)Get<T>(path, true);
         }
 
-        public static dynamic Get<T>(string path, bool deserialize)
+        public static object Get<T>(string path, bool deserialize)
         {
             return GetAsync<T>(path, deserialize).GetAwaiter().GetResult();
         }
 
-        public static dynamic GetAsync<T>(string path)
+        public static async Task<T> GetAsync<T>(string path)
         {
-            return GetAsync<T>(path, true);
+            return (T)await GetAsync<T>(path, true);
         }
 
-        public static async Task<dynamic> GetAsync<T>(string path, bool deserialize)
+        public static async Task<object> GetAsync<T>(string path, bool deserialize)
         {
             var op = await OpAsync(path, "GET", null);
 
@@ -151,7 +149,7 @@ namespace Balanced
             return Deserialize(Op(path, "POST", payload), typeof(T));
         }
 
-        public static async Task<dynamic> PostAsync<T>(string path, string payload)
+        public static async Task<T> PostAsync<T>(string path, string payload)
         {
             return Deserialize(await OpAsync(path, "POST", payload), typeof(T));
         }
@@ -161,7 +159,7 @@ namespace Balanced
             return Deserialize(Op(path, "PUT", payload), typeof(T));
         }
 
-        public static async Task<dynamic> PutAsync<T>(string path, string payload)
+        public static async Task<T> PutAsync<T>(string path, string payload)
         {
             return Deserialize(await OpAsync(path, "PUT", payload), typeof(T));
         }
@@ -301,16 +299,16 @@ namespace Balanced
                     {
                         if (linkHref.Contains("/CC"))
                         {
-                            res = Deserialize(Client.Get<dynamic>(linkHref, false), typeof(Card), resource);
+                            res = Deserialize((string)Client.Get<dynamic>(linkHref, false), typeof(Card), resource);
                         }
                         else if (linkHref.Contains("/BA"))
                         {
-                            res = Deserialize(Client.Get<dynamic>(linkHref, false), typeof(BankAccount), resource);
+                            res = Deserialize((string)Client.Get<dynamic>(linkHref, false), typeof(BankAccount), resource);
                         }
                     }
                     else
                     {
-                        res = Deserialize(Client.Get<dynamic>(linkHref, false), f.PropertyType, resource);
+                        res = Deserialize((string)Client.Get<dynamic>(linkHref, false), f.PropertyType, resource);
                     }
                 }
 

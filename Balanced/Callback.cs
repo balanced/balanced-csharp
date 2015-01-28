@@ -35,9 +35,19 @@ namespace Balanced
             return Resource.Fetch<Callback>(href);
         }
 
+        public static Task<Callback> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Callback>(href);
+        }
+
         public void Save()
         {
             this.Save<Callback>();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Callback>();
         }
 
         public class Collection : ResourceCollection<Callback>

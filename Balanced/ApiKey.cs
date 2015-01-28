@@ -26,15 +26,31 @@ namespace Balanced
             return Resource.Fetch<ApiKey>(href);
         }
 
+        public static Task<ApiKey> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<ApiKey>(href);
+        }
+
         public void Save()
         {
             Balanced.configure(null);
             this.Save<ApiKey>();
         }
 
+        public Task SaveAsync()
+        {
+            Balanced.configure(null);
+            return this.SaveAsync<ApiKey>();
+        }
+
         public void SaveToMarketplace()
         {
             this.Save<ApiKey>();
+        }
+
+        public Task SaveToMarketplaceAsync()
+        {
+            return this.SaveAsync<ApiKey>();
         }
 
         public class Collection : ResourceCollection<ApiKey>

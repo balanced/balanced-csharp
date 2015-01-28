@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Balanced;
 using System.Collections.Generic;
@@ -167,7 +168,7 @@ namespace BalancedTests
             );
 
             var request = new Mock<HttpWebRequest>();
-            request.Setup(c => c.GetResponse()).Returns(response.Object);
+            request.Setup(c => c.GetResponseAsync()).Returns(() => Task.FromResult((WebResponse)response.Object));
 
             var factory = new Mock<IHttpWebRequestFactory>();
             factory.Setup(c => c.Create(It.IsAny<string>()))

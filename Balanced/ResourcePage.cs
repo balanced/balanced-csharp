@@ -108,7 +108,7 @@ namespace Balanced
     
         internal void Load()
         {
-            string responsePayload = Client.Get<Dictionary<string, object>>(href, false);
+            string responsePayload = (string)Client.Get<Dictionary<string, object>>(href, false);
             var responseObject = JObject.Parse(responsePayload);
             IList<string> keys = responseObject.Properties().Select(p => p.Name).ToList();
             Dictionary<string, object> meta = null;

@@ -63,14 +63,29 @@ namespace Balanced
             return Resource.Fetch<Debit>(href);
         }
 
+        public static Task<Debit> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Debit>(href);
+        }
+
         public void Save()
         {
             this.Save<Debit>();
         }
 
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Debit>();
+        }
+
         public void Reload()
         {
             this.Reload<Debit>();
+        }
+
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<Debit>();
         }
 
         public Refund Refund(Dictionary<string, object> payload)
@@ -81,6 +96,16 @@ namespace Balanced
         public Refund Refund()
         {
             return Refund(null);
+        }
+
+        public Task<Refund> RefundAsync(Dictionary<string, object> payload)
+        {
+            return refunds.CreateAsync(payload);
+        }
+
+        public Task<Refund> RefundAsync()
+        {
+            return RefundAsync(null);
         }
 
         public class Collection : ResourceCollection<Debit>

@@ -19,7 +19,17 @@ namespace Balanced
         [ResourceField(serialize = false)]
         public string fingerprint { get; set; }
 
-        public abstract Debit Debit(Dictionary<string, object> payload);
-        public abstract Credit Credit(Dictionary<string, object> payload);
+        public Debit Debit(Dictionary<string, object> payload)
+        {
+            return DebitAsync(payload).GetAwaiter().GetResult();
+        }
+
+        public Credit Credit(Dictionary<string, object> payload)
+        {
+            return CreditAsync(payload).GetAwaiter().GetResult();
+        }
+
+        public abstract Task<Debit> DebitAsync(Dictionary<string, object> payload);
+        public abstract Task<Credit> CreditAsync(Dictionary<string, object> payload);
     }
 }

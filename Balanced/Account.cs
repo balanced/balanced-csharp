@@ -48,9 +48,19 @@ namespace Balanced
             return Resource.Fetch<Account>(href);
         }
 
+        public static Task<Account> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Account>(href);
+        }
+
         public void Save()
         {
             this.Save<Account>();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Account>();
         }
 
         public void Reload()
@@ -58,19 +68,23 @@ namespace Balanced
             this.Reload<Account>();
         }
 
-
-        public override Credit Credit(Dictionary<string, object> payload)
+        public Task ReloadAsync()
         {
-            return credits.Create(payload);
+            return this.ReloadAsync<Account>();
         }
 
-        public override Debit Debit(Dictionary<string, object> payload)
+        public override Task<Credit> CreditAsync(Dictionary<string, object> payload)
+        {
+            return credits.CreateAsync(payload);
+        }
+
+        public override Task<Debit> DebitAsync(Dictionary<string, object> payload)
         {
             if (this.can_debit == false)
             {
                 throw new Exceptions.FundingInstrumentNotDebitable();
             }
-            return debits.Create(payload);
+            return debits.CreateAsync(payload);
         }
 
         public Settlement Settle(Dictionary<string, object> payload)

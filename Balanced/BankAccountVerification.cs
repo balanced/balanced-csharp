@@ -39,9 +39,19 @@ namespace Balanced
             return Resource.Fetch<BankAccountVerification>(href);
         }
 
+        public static Task<BankAccountVerification> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<BankAccountVerification>(href);
+        }
+
         public void Save()
         {
             this.Save<BankAccountVerification>();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<BankAccountVerification>();
         }
 
         public void Reload()
@@ -49,13 +59,25 @@ namespace Balanced
             this.Reload<BankAccountVerification>();
         }
 
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<BankAccountVerification>();
+        }
+
         public void Confirm(int amount_1, int amount_2)
         {
-            Dictionary<string, int> payload = new Dictionary<string, int>();
-            payload.Add("amount_1", amount_1);
-            payload.Add("amount_2", amount_2);
-            Client.Put<BankAccountVerification>(href, Resource.Serialize(payload));
-            Reload();
+            ConfirmAsync(amount_1, amount_2).GetAwaiter().GetResult();
+        }
+
+        public async Task ConfirmAsync(int amount_1, int amount_2)
+        {
+            var payload = new Dictionary<string, int>
+            {
+                {"amount_1", amount_1}, 
+                {"amount_2", amount_2}
+            };
+            await Client.PutAsync<BankAccountVerification>(href, Resource.Serialize(payload));
+            await ReloadAsync();
         }
 
         public class Collection : ResourceCollection<BankAccountVerification>

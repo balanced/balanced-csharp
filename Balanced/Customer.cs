@@ -84,9 +84,19 @@ namespace Balanced
             return Resource.Fetch<Customer>(href);
         }
 
+        public static Task<Customer> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Customer>(href);
+        }
+
         public void Save()
         {
             this.Save<Customer>();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Customer>();
         }
 
         public void Reload()
@@ -94,9 +104,19 @@ namespace Balanced
             this.Reload<Customer>();
         }
 
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<Customer>();
+        }
+
         public Order CreateOrder(Dictionary<string, Object> payload)
         {
-            return orders.Create(payload);
+            return CreateOrderAsync(payload).GetAwaiter().GetResult();
+        }
+
+        public Task<Order> CreateOrderAsync(Dictionary<string, Object> payload)
+        {
+            return orders.CreateAsync(payload);
         }
 
         public class Collection : ResourceCollection<Customer>

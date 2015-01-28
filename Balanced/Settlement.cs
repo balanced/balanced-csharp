@@ -52,9 +52,19 @@ namespace Balanced
             return Resource.Fetch<Settlement>(href);
         }
 
+        public static Task<Settlement> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Settlement>(href);
+        }
+
         public void Save()
         {
             this.Save<Settlement>();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Settlement>();
         }
 
         public class Collection : ResourceCollection<Settlement>

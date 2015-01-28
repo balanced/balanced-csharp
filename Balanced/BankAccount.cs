@@ -53,14 +53,29 @@ namespace Balanced
             return Resource.Fetch<BankAccount>(href);
         }
 
+        public static Task<BankAccount> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<BankAccount>(href);
+        }
+
         public void Save()
         {
             this.Save<BankAccount>();
         }
 
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<BankAccount>();
+        }
+
         public void Reload()
         {
             this.Reload<BankAccount>();
+        }
+
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<BankAccount>();
         }
 
         public void AssociateToCustomer(Customer customer)
@@ -70,25 +85,43 @@ namespace Balanced
 
         public void AssociateToCustomer(string href)
         {
+            AssociateToCustomerAsync(href).GetAwaiter().GetResult();
+        }
+
+        public Task AssociateToCustomerAsync(Customer customer)
+        {
+            return this.AssociateToCustomerAsync(customer.href);
+        }
+
+        public async Task AssociateToCustomerAsync(string href)
+        {
             if (href != null)
             {
                 links.Add("customer", href);
-                this.Save();
+                await this.SaveAsync();
             }
         }
 
-        public override Credit Credit(Dictionary<string, object> payload)
+        public override Task<Credit> CreditAsync(Dictionary<string, object> payload)
         {
-            return credits.Create(payload);
+            return credits.CreateAsync(payload);
         }
 
-        public override Debit Debit(Dictionary<string, object> payload)
+        public override Task<Debit> DebitAsync(Dictionary<string, object> payload)
         {
-            return debits.Create(payload);
+            return debits.CreateAsync(payload);
         }
 
-        public BankAccountVerification Verify() { return verifications.Create(); }
-        
+        public BankAccountVerification Verify()
+        {
+            return verifications.Create();
+        }
+
+        public Task<BankAccountVerification> VerifyAsync()
+        {
+            return verifications.CreateAsync();
+        }
+
         public class Collection : ResourceCollection<BankAccount>
         {
             public Collection() : base(resource_href) { }

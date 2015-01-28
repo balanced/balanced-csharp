@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Collections;
-
 using Newtonsoft.Json;
-using System.Dynamic;
 using System.Reflection;
 
 namespace Balanced
@@ -30,16 +26,20 @@ namespace Balanced
 
         public void Save<T>()
         {
+            SaveAsync<T>().GetAwaiter().GetResult();
+        }
+        public async Task SaveAsync<T>()
+        {
             dynamic res = null;
 
             if (this.href != null)
             {
-                res = Client.Put<T>(this.href, Serialize(this));
+                res = await Client.PutAsync<T>(this.href, Serialize(this));
             }
             else
             {
                 string href = this.GetType().GetProperty("resource_href").GetValue(this).ToString();
-                res = Client.Post<T>(href, Serialize(this));
+                res = await Client.PostAsync<T>(href, Serialize(this));
             }
 
             UpdateResource<T>(res);
@@ -50,14 +50,29 @@ namespace Balanced
             Client.Delete(this.href);
         }
 
+        public Task UnstoreAsync()
+        {
+            return Client.DeleteAsync(this.href);
+        }
+
         public static T Fetch<T>(string href)
         {
             return Client.Get<T>(href);
         }
 
+        public static Task<T> FetchAsync<T>(string href)
+        {
+            return Client.GetAsync<T>(href);
+        }
+
         public void Reload<T>()
         {
-            dynamic res = Client.Get<T>(href);
+            ReloadAsync<T>().GetAwaiter().GetResult();
+        }
+
+        public async Task ReloadAsync<T>()
+        {
+            dynamic res = await Client.GetAsync<T>(href);
             UpdateResource<T>(res);
         }
 

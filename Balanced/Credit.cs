@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System.Threading.Tasks;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Balanced
 {
@@ -60,9 +57,19 @@ namespace Balanced
             return Resource.Fetch<Credit>(href);
         }
 
+        public static Task<Credit> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Credit>(href);
+        }
+
         public void Save()
         {
             this.Save<Credit>();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Credit>();
         }
 
         public void Reload()
@@ -70,14 +77,29 @@ namespace Balanced
             this.Reload<Credit>();
         }
 
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<Credit>();
+        }
+
         public Reversal Reverse(Dictionary<string, object> payload)
         {
-            return reversals.Create(payload);
+            return ReverseAsync(payload).GetAwaiter().GetResult();
         }
 
         public Reversal Reverse()
         {
-            return Reverse(null);
+            return ReverseAsync().GetAwaiter().GetResult();
+        }
+
+        public Task<Reversal> ReverseAsync(Dictionary<string, object> payload)
+        {
+            return reversals.CreateAsync(payload);
+        }
+
+        public Task<Reversal> ReverseAsync()
+        {
+            return ReverseAsync(null);
         }
 
         public class Collection : ResourceCollection<Credit>

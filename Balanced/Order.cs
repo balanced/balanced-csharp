@@ -57,9 +57,19 @@ namespace Balanced
             return Resource.Fetch<Order>(href);
         }
 
+        public static Task<Order> FetchAsync(string href)
+        {
+            return Resource.FetchAsync<Order>(href);
+        }
+
         public void Save()
         {
             this.Save<Order>();
+        }
+
+        public Task SaveAsync()
+        {
+            return this.SaveAsync<Order>();
         }
 
         public void Reload()
@@ -67,16 +77,31 @@ namespace Balanced
             this.Reload<Order>();
         }
 
+        public Task ReloadAsync()
+        {
+            return this.ReloadAsync<Order>();
+        }
+
         public Debit DebitFrom(FundingInstrument fi, Dictionary<string, object> options)
         {
+            return DebitFromAsync(fi, options).GetAwaiter().GetResult();
+        }
+
+        public Task<Debit> DebitFromAsync(FundingInstrument fi, Dictionary<string, object> options)
+        {
             options.Add("order", this.href);
-            return fi.Debit(options);
+            return fi.DebitAsync(options);
         }
 
         public Credit CreditTo(BankAccount ba, Dictionary<string, object> options)
         {
+            return CreditToAsync(ba, options).GetAwaiter().GetResult();
+        }
+
+        public Task<Credit> CreditToAsync(BankAccount ba, Dictionary<string, object> options)
+        {
             options.Add("order", this.href);
-            return ba.Credit(options);
+            return ba.CreditAsync(options);
         }
 
         public class Collection : ResourceCollection<Order>

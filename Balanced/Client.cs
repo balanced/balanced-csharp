@@ -7,8 +7,6 @@ using System.Net.Cache;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
-using System.Web;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Balanced.Exceptions;
@@ -33,40 +31,62 @@ namespace Balanced
 
     public static class Client
     {
-        public static dynamic processResponse(HttpWebRequest request)
+        public static string processResponse(HttpWebRequest request)
         {
-            string responsePayload = string.Empty;
+            return processResponseAsync(request).GetAwaiter().GetResult();
+        }
+
+        public static async Task<string> processResponseAsync(HttpWebRequest request)
+        {
+            HttpWebResponse exceptionResponse = null;
+
             try
             {
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync())
                 {
                     using (var stream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(1252)))
                     {
-                        responsePayload = stream.ReadToEnd();
+                        return await stream.ReadToEndAsync();
                     }
                 }
             }
             catch (WebException ex)
             {
-                using (var stream = new StreamReader(ex.Response.GetResponseStream()))
+                exceptionResponse = (HttpWebResponse)ex.Response;
+            }
+            
+            return await HandleExceptionResponse(exceptionResponse);
+        }
+
+        private static async Task<string> HandleExceptionResponse(HttpWebResponse exceptionResponse)
+        {
+            string responsePayload = string.Empty;
+            using (var stream = new StreamReader(exceptionResponse.GetResponseStream()))
+            {
+                responsePayload = await stream.ReadToEndAsync();
+            }
+
+            if ((int) exceptionResponse.StatusCode >= 299)
+            {
+                if (!string.IsNullOrEmpty(responsePayload))
                 {
-                    responsePayload = stream.ReadToEnd();
+                    Error(exceptionResponse, responsePayload);
                 }
-
-                HttpWebResponse response = (HttpWebResponse)ex.Response;
-
-                if ((int)response.StatusCode >= 299)
+                else
                 {
-                    if (responsePayload != null)
-                        Error(response, responsePayload);
-                    else
-                        throw new HTTPException(response, responsePayload);
+                    throw new HTTPException(exceptionResponse, string.Empty);
                 }
             }
+
             return responsePayload;
         }
 
-        private static dynamic Op(string path, string method, string payload)
+        private static string Op(string path, string method, string payload)
+        {
+            return OpAsync(path, method, payload).GetAwaiter().GetResult();
+        }
+
+        private static async Task<string> OpAsync(string path, string method, string payload)
         {
             string url = Balanced.API_URL + path;
             var request = (HttpWebRequest)WebRequest.Create(url);
@@ -93,21 +113,35 @@ namespace Balanced
                 dataStream.Write(postBytes, 0, postBytes.Length);
                 dataStream.Close();
             }
-            
-            return processResponse(request);
+
+            return await processResponseAsync(request);
         }
 
-        public static dynamic Get<T>(string path)
+        public static T Get<T>(string path)
         {
-            return Get<T>(path, true);
+            return (T)Get<T>(path, true);
         }
 
-        public static dynamic Get<T>(string path, bool deserialize)
+        public static object Get<T>(string path, bool deserialize)
         {
+            return GetAsync<T>(path, deserialize).GetAwaiter().GetResult();
+        }
+
+        public static async Task<T> GetAsync<T>(string path)
+        {
+            return (T)await GetAsync<T>(path, true);
+        }
+
+        public static async Task<object> GetAsync<T>(string path, bool deserialize)
+        {
+            var op = await OpAsync(path, "GET", null);
+
             if (deserialize)
-                return Deserialize(Op(path, "GET", null), typeof(T));
+            {
+                return Deserialize(op, typeof(T));
+            }
 
-            return Op(path, "GET", null);
+            return op;
         }
 
         public static dynamic Post<T>(string path, string payload)
@@ -115,9 +149,19 @@ namespace Balanced
             return Deserialize(Op(path, "POST", payload), typeof(T));
         }
 
+        public static async Task<T> PostAsync<T>(string path, string payload)
+        {
+            return Deserialize(await OpAsync(path, "POST", payload), typeof(T));
+        }
+
         public static dynamic Put<T>(string path, string payload)
         {
             return Deserialize(Op(path, "PUT", payload), typeof(T));
+        }
+
+        public static async Task<T> PutAsync<T>(string path, string payload)
+        {
+            return Deserialize(await OpAsync(path, "PUT", payload), typeof(T));
         }
 
         public static void Delete(string path)
@@ -125,13 +169,9 @@ namespace Balanced
             Op(path, "DELETE", null);
         }
 
-        private static string ToQueryString(Dictionary<string, string> queryParams)
+        public static Task DeleteAsync(string path)
         {
-            var array = (from key in queryParams.Keys
-                         from value in queryParams.Values
-                         select string.Format("{0}={1}", HttpUtility.UrlEncode(key), HttpUtility.UrlEncode(value)))
-                .ToArray();
-            return "?" + string.Join("&", array);
+            return OpAsync(path, "DELETE", null);
         }
 
         public static void Error(HttpWebResponse response, string responsePayload)
@@ -259,16 +299,16 @@ namespace Balanced
                     {
                         if (linkHref.Contains("/CC"))
                         {
-                            res = Deserialize(Client.Get<dynamic>(linkHref, false), typeof(Card), resource);
+                            res = Deserialize((string)Client.Get<dynamic>(linkHref, false), typeof(Card), resource);
                         }
                         else if (linkHref.Contains("/BA"))
                         {
-                            res = Deserialize(Client.Get<dynamic>(linkHref, false), typeof(BankAccount), resource);
+                            res = Deserialize((string)Client.Get<dynamic>(linkHref, false), typeof(BankAccount), resource);
                         }
                     }
                     else
                     {
-                        res = Deserialize(Client.Get<dynamic>(linkHref, false), f.PropertyType, resource);
+                        res = Deserialize((string)Client.Get<dynamic>(linkHref, false), f.PropertyType, resource);
                     }
                 }
 
